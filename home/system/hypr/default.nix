@@ -4,6 +4,7 @@
     ./hyprland/rules.nix
     ./hyprland/keybinds.nix
     ./hyprland/execs.nix
+    ./hyprlock.nix
   ];
 
   home.packages = with pkgs; [
@@ -20,7 +21,7 @@
     qt6ct
     swww
     mpvpaper
-    
+
   ];
 
   wayland.windowManager.hyprland = {
