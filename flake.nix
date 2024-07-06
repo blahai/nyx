@@ -29,7 +29,18 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/nyx/configuration.nix
-          
+          inputs.home-manager.nixosModules.home-manager
+          {
+            nixpkgs.overlays = [ nur.overlay ];
+            _module.args = { inherit inputs; };
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users."pingu" = import
+                ./hosts/nyx/home.nix;
+              extraSpecialArgs = { inherit inputs; };
+            };
+          }
         ];
       };
 

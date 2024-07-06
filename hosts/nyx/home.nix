@@ -13,11 +13,15 @@
     # System
     ../../home/system/gtk
     ../../home/system/mime
+    ../../home/system/hypr
 
 
   ];
 
   home = {
+    username = "pingu";
+    homeDirectory = "/home/pingu/";
+
     packages = with pkgs; [
       # Stuff
       obsidian

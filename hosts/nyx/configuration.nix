@@ -40,14 +40,17 @@
   users.users.pingu = {
     isNormalUser = true;
     description = "Elissa";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "kvm" "libvirtd" "video" "audio" "input" "render" ];
   };
   defaultUserShell = pkgs.zsh;
 
   services = {
     xserver = {
       enable = true;
-      displayManager.sddm.enable = true;
+        displayManager.sddm = { 
+          enable = true;
+          theme =  "breeze"
+        };
       xkb = { 
         layout = "us,fi";
         variant = "euro";
@@ -98,8 +101,7 @@
       persistent = true;
       dates = "weekly";
       options = "--delete-older-than 7d";
-    } else
-      { };
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
