@@ -28,8 +28,26 @@
       vscode
       firefox
 
+      # Idk
+      bitwarden
+      vesktop
+      nextcloud-client
+
+      # Dev Stuff
+      gcc
+      go
+      cargo
+      jq
+      git
+      git-ignore
+      nodejs
+      bun
+
       # Media
       jellyfin-media-player
+      mpv
+      vlc
+      eog
       
     ];
 }
