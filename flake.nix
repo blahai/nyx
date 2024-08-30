@@ -21,6 +21,11 @@
 
     ags.url = "github:Aylur/ags/05e0f23534fa30c1db2a142664ee8f71e38db260";
 
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
