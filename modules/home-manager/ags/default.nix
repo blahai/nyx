@@ -1,7 +1,13 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, lib, ... }:
 {
   # add the home manager module
   imports = [ inputs.ags.homeManagerModules.default ];
+
+  home.activation = {
+    linkAgs = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      ln -sf ./ags ~/.config/ags
+    '';
+  };
 
   programs.ags = {
     enable = true;
