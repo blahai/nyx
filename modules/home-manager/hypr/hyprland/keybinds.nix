@@ -14,7 +14,7 @@
       "Super, Q, exec, ${pkgs.foot}/bin/foot"
       "Super, C, killactive"
       "Super, V, togglefloating"
-      "Super, E, exec, ${pkgs.gnome.nautilus} --new-window"
+      "Super, E, exec, ${pkgs.nautilus} --new-window"
       
       # This horror of a mess is from having more than 10 workspaces and I'm very much considering just removing this shit
     ] ++ map (n: "Alt, ${toString n}, exec, ~/.config/ags/scripts/hyprland/workspace_adction.sh movetoworkspacesilent ${toString (

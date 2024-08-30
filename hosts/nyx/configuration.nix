@@ -4,6 +4,7 @@
   imports =
     [ 
       ./hardware-configuration.nix
+      ../../modules/nixos/games/default.nix
       inputs.home-manager.nixosModules.default
     ];
 
@@ -110,7 +111,7 @@
       package = inputs.hyprland.packages."${pkgs.system}".hyprland;
     };
     
-    dir{
+    direnv = {
       enable = true;
     };
     
@@ -146,6 +147,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    hyprcursor  
     neovim
     wget
     git
@@ -167,6 +169,7 @@
     busybox
     rustup
     vscode-fhs
+    bibata-cursors
   ];
 
   fonts.packages = with pkgs; [

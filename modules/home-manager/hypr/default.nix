@@ -1,4 +1,4 @@
-{ pkgs, config, inputs, ... }: { 
+{ pkgs, config, inputs, lib, ... }: { 
 
   imports = [
     ./hyprland/rules.nix
@@ -8,8 +8,6 @@
     ../ags/default.nix
   ];
 
-  # apparently hyprcursor doesn't work with hm?
-  environment.systemPackages = [ pkgs.hyprcursor ];
   home.packages = with pkgs; [
     hyprshot
     hyprpicker
@@ -25,7 +23,8 @@
     mpvpaper
   ];
 
-  home.file."~/.config/hypr/colors.conf" = {
+
+  home.file."~/.config/hypr/hyprland/colors.conf" = {
     text = ''
       general {
         col.active_border = rgba(DFE2EF39)
@@ -38,14 +37,17 @@
 
       windowrulev2 = bordercolor rgba(ADC6FFAA) rgba(ADC6FF77),pinned:1
     '';
-    checkPhase = ''
-      if [ -f "$out" ]; then
-        echo "File already exists, skipping creation"
-        exit 0
-      fi
-    '';
-  };
+    };
 
+
+  xdg.portal = {
+    enable = true;
+    configPackages = [ config.wayland.windowManager.hyprland.package ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
+    ];
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -53,6 +55,10 @@
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
 
     settings = {
+      source = [
+        "~/.config/hypr/hyprland/colors.conf"
+      ];
+
       monitor = [
         ",prefered,auto,1"
       ];
@@ -110,7 +116,7 @@
         drop_shadow = true;
         shadow_ignore_window = true;
         shadow_range = 20;
-        shadow_offset = 0 2;
+        shadow_offset = "0 2";
         shadow_render_power = 4;
         "col.shadow" = "rgba(0000002A)";
 

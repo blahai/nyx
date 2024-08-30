@@ -11,7 +11,7 @@
       };
 
       backgruond = {
-        color = "rgba(000000FF)"        
+        color = "rgba(000000FF)";
       };
 
       input-field = [{
@@ -39,7 +39,7 @@
           font_size   = "65";
           font_family = "Rubik Light";
 
-          position = "0, 300"         
+          position = "0, 300";
         }
 
         { # Greeting

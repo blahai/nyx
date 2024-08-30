@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
 
-  home.packages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     protonup-qt
     prismlauncher
     osu-lazer-bin
@@ -17,10 +17,9 @@
   };
 
   hardware.opentabletdriver.enable = true;
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
 }
