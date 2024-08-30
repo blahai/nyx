@@ -5,6 +5,7 @@
     ./hyprland/keybinds.nix
     ./hyprland/execs.nix
     ./hyprlock.nix
+    ../ags/default.nix
   ];
 
   # apparently hyprcursor doesn't work with hm?

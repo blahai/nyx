@@ -3,7 +3,6 @@
 {
   imports = [
     ../../modules/home-manager/hypr/default.nix
-    ../../modules/home-manager/ags/default.nix
     ../../modules/nixos/games/default.nix
   ];
 
