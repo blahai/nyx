@@ -2,8 +2,9 @@
 
 {
   imports = [
-    ../../modules/home-manager/hyprland.nix
-    ../../modules/home-manager/ags/ags.nix
+    ../../modules/home-manager/hypr/default.nix
+    ../../modules/home-manager/ags/default.nix
+    ../../modules/nixos/games/default.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -59,6 +60,25 @@
   #
   home.sessionVariables = {
     EDITOR = "nvim";
+    XMODIFIERS = "@im=ibus";
+    GTK_IM_MODULE = "ibus";
+    QT_IM_MODULE = "ibus"
+    QT_QPA_PLATFORMTHEME = "qt5ct";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    GSK_RENDERER = "cairo";
+
+    MOZ_ENABLE_WAYLAND = "1";
+    XDG_CURRENT_DESKTOP = "Hyprland";
+    XDG_SESSION_TYPE = "wayland";
+    XDG_SESSION_DESKTOP = "Hyprland";
+
+    _JAVA_AWT_WM_NONREPARENTING = "1"
+    XCURSOR_THEME = "Bibata-Modern-Classic";
+    HYPRCURSOR_THEME = "HyprBibataModernClassicSVG"
+    XCURSOR_SIZE, 24
+    __GL_THREADED_OPTIMIZATIONS, 0
+    QT_QPA_PLATFORM = "wayland";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = 1
   };
 
   # Let Home Manager install and manage itself.
