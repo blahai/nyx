@@ -1,7 +1,11 @@
-{ pkgs, lib, config, ... }: {
+{ pkgs, lib, config, inputs, ... }: {
 
   imports = [
     inputs.spicetify-nix.homeManagerModules.default
+  ];
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "spotify"
   ];
 
   programs.spicetify =
@@ -16,5 +20,5 @@
      ];
      theme = spicePkgs.themes.comfy;
      colorScheme = "Hikari";
-   }
+   };
 }

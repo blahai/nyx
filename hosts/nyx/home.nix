@@ -1,14 +1,31 @@
 { inputs, config, pkgs, ... }:
-
+let
+    moreWaita = pkgs.stdenv.mkDerivation {
+    name = "MoreWaita";
+    src = inputs.more-waita;
+    installPhase = ''
+      mkdir -p $out/share/icons
+      mv * $out/share/icons
+    '';
+  };
+in
 {
   imports = [
     ../../modules/home-manager/hypr/default.nix
+    ../../modules/home-manager/spotify/default.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "pingu";
   home.homeDirectory = "/home/pingu";
+
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 24;
+  };
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -22,8 +39,30 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    
+
   ];
+
+  home.file = {
+    ".local/share/fonts" = {
+      recursive = true;
+      source = "${pkgs.nerdfonts}/share/fonts/truetype/NerdFonts";
+    };
+    ".fonts" = {
+      recursive = true;
+      source = "${pkgs.nerdfonts}/share/fonts/truetype/NerdFonts";
+    };
+  };
+
+  gtk = {
+    enable = true;
+    font.name = "Rubik";
+    theme.name = "adw-gtk3-dark";
+    };
+
+  qt = {
+    enable = true;
+    platformTheme.name = "kde";
+  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -61,7 +100,6 @@
     XMODIFIERS = "@im=ibus";
     GTK_IM_MODULE = "ibus";
     QT_IM_MODULE = "ibus";
-    QT_QPA_PLATFORMTHEME = "qt5ct";
     WLR_NO_HARDWARE_CURSORS = "1";
     GSK_RENDERER = "cairo";
 

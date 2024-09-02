@@ -15,30 +15,12 @@
     wl-clipboard
     brightnessctl
     xwayland
-    xdg-desktop-portal-hyprland
-    xdg-desktop-portal-gtk
-    qt5ct
-    qt6ct
     swww
     mpvpaper
+    grim
+    slurp
+    libnotify
   ];
-
-
-  home.file."~/.config/hypr/hyprland/colors.conf" = {
-    text = ''
-      general {
-        col.active_border = rgba(DFE2EF39)
-        col.inactive_border = rgba(8C909F30)
-      }
-
-      misc {
-        background_color = rgba(0F131CFF)
-      }
-
-      windowrulev2 = bordercolor rgba(ADC6FFAA) rgba(ADC6FF77),pinned:1
-    '';
-    };
-
 
   xdg.portal = {
     enable = true;
@@ -55,9 +37,6 @@
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
 
     settings = {
-      source = [
-        "~/.config/hypr/hyprland/colors.conf"
-      ];
 
       monitor = [
         ",prefered,auto,1"
@@ -100,7 +79,7 @@
         rounding = 15;
 
         blur = {
-          enable = true;
+          enabled = true;
           xray = true;
           special = true;
           new_optimizations = true;
@@ -181,6 +160,6 @@
 
     };
 
-  };
-
+  };  
+  
 }

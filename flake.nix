@@ -19,7 +19,9 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
-    ags.url = "github:Aylur/ags/05e0f23534fa30c1db2a142664ee8f71e38db260";
+    # this commit seems to be fucked on nixos now
+    # ags.url = "github:Aylur/ags/05e0f23534fa30c1db2a142664ee8f71e38db260";
+    ags.url = "github:Aylur/ags";
 
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
@@ -29,6 +31,11 @@
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    more-waita = {
+      url = "github:somepaulo/MoreWaita";
+      flake = false;
     };
 
     home-manager = {

@@ -9,6 +9,7 @@
     ];
 
   boot = {
+    tmp.cleanOnBoot = true;
     loader = {
       systemd-boot = {
         enable = true;
@@ -77,6 +78,7 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
+    useGlobalPkgs = true;
     users = {
       "pingu" = import ./home.nix;
     };
@@ -121,6 +123,8 @@
 
     };
 
+    nix-ld.enable = true;
+
     git = {
       enable = true;
       lfs.enable = true;
@@ -147,7 +151,8 @@
   };
 
   environment.systemPackages = with pkgs; [
-    hyprcursor  
+    hyprcursor
+    grimblast  
     neovim
     wget
     git
@@ -162,7 +167,6 @@
     clang
     go
     nixfmt-classic
-    python3
     zip
     nodejs
     typescript
@@ -170,6 +174,40 @@
     rustup
     vscode-fhs
     bibata-cursors
+    spotify
+    jq
+    gnome.gnome-control-center
+    pavucontrol
+    icon-library
+    bat
+    fzf
+    fd
+    eza
+    glib
+    cliphist
+    playerctl
+    socat
+    adwaita-qt6
+    material-icons
+    material-design-icons
+    material-symbols
+    ddcutil
+    (python312.withPackages (ps: with ps; [ 
+      pillow
+      material-color-utilities
+      materialyoucolor
+      wheel
+      setuptools-scm
+      libsass
+      pywayland
+      psutil
+      numpy
+      requests
+      pyxdg
+    ]))
+    pywal
+    dart-sass
+    imagemagick
   ];
 
   fonts.packages = with pkgs; [
@@ -179,6 +217,9 @@
     noto-fonts-cjk
     noto-fonts-emoji
     nerdfonts
+    google-fonts
+    material-symbols
+    material-icons
   ];
 
   programs.gnupg.agent = {
