@@ -19,9 +19,10 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
-    # this commit seems to be fucked on nixos now
-    # ags.url = "github:Aylur/ags/05e0f23534fa30c1db2a142664ee8f71e38db260";
-    ags.url = "github:Aylur/ags";
+    ags = {
+      url = "github:Aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";

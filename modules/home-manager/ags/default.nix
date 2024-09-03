@@ -14,12 +14,15 @@
     ollama
     pywal
     dart-sass
-    unstable.hicolor-icon-theme
+    hicolor-icon-theme
     yad
+    fuzzel
+    gradience
+    adw-gtk3
     (python311.withPackages (p: [
       p.material-color-utilities
       p.pywayland
-      materialyoucolor
+      p.materialyoucolor
       p.libsass
     ]))
   ];

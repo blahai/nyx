@@ -110,7 +110,7 @@ in
 
     _JAVA_AWT_WM_NONREPARENTING = "1";
     XCURSOR_THEME = "Bibata-Modern-Classic";
-    HYPRCURSOR_THEME = "HyprBibataModernClassicSVG";
+    # HYPRCURSOR_THEME = "HyprBibataModernClassicSVG";
     XCURSOR_SIZE = "24";
     __GL_THREADED_OPTIMIZATIONS = "0";
     QT_QPA_PLATFORM = "wayland";
