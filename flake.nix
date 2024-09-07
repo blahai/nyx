@@ -24,6 +24,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    matugen.url = "github:InioX/matugen?ref=v2.2.0";
+
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -56,6 +58,15 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./hosts/nyx/configuration.nix
+            inputs.home-manager.nixosModules.default
+            chaotic.nixosModules.default
+          ];
+        };
+        
+        helios = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/helios/configuration.nix
             inputs.home-manager.nixosModules.default
             chaotic.nixosModules.default
           ];
