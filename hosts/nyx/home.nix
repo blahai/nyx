@@ -1,6 +1,6 @@
 { inputs, config, pkgs, ... }:
 let
-    moreWaita = pkgs.stdenv.mkDerivation {
+  moreWaita = pkgs.stdenv.mkDerivation {
     name = "MoreWaita";
     src = inputs.more-waita;
     installPhase = ''

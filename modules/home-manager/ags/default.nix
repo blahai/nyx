@@ -3,28 +3,20 @@
   imports = [ inputs.ags.homeManagerModules.default ];
 
   home.packages = with pkgs; [
-    gnome.gnome-control-center
-    blueberry
-    gammastep
-    gnome.gnome-bluetooth
-    material-symbols
-    gnome-usage
-    ddcutil
-    inotify-tools
-    ollama
-    pywal
+    bun
     dart-sass
-    hicolor-icon-theme
-    yad
-    fuzzel
-    gradience
-    adw-gtk3
-    (python311.withPackages (p: [
-      p.material-color-utilities
-      p.pywayland
-      p.materialyoucolor
-      p.libsass
-    ]))
+    fd
+    brightnessctl
+    swww
+    inputs.matugen.packages.${system}.default
+    slurp
+    wl-clipboard
+    wayshot
+    swappy
+    hyprpicker
+    pavucontrol
+    networkmanager
+    gtk3
   ];
 
   #home.activation = {
@@ -42,18 +34,7 @@
 
     # additional packages to add to gjs's runtime
     extraPackages = with pkgs; [
-      hicolor-icon-theme
-      gnome-usage
-      gtksourceview
-      gtksourceview4
-      ollama
-      python311Packages.material-color-utilities
-      python311Packages.pywayland
-      pywal
-      dart-sass
-      webkitgtk
-      webp-pixbuf-loader
-      ydotool
+      accountsservice
     ];
   };
 }
