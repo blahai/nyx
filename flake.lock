@@ -54,6 +54,21 @@
         "type": "github"
       }
     },
+    "catppuccin": {
+      "locked": {
+        "lastModified": 1728407414,
+        "narHash": "sha256-B8LaxUP93eh+it8RW1pGq4SsU2kj7f0ipzFuhBvpON8=",
+        "owner": "catppuccin",
+        "repo": "nix",
+        "rev": "96cf8b4a05fb23a53c027621b1147b5cf9e5439f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "nix",
+        "type": "github"
+      }
+    },
     "chaotic": {
       "inputs": {
         "fenix": "fenix",
@@ -63,11 +78,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1728587571,
-        "narHash": "sha256-vQmYKJ9sLQP6VivCdKNdpisXrB6xpDaaTif5U+IogzQ=",
+        "lastModified": 1728835058,
+        "narHash": "sha256-GbcJ90E8+wBkBh9C1HxBTwKsOkGU41CRaPrd1ksFPtA=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "d73c548a001f367048d4f22cf2ae626cd2002503",
+        "rev": "ec6b449d3d096a0e79db5f8c4a321ea9ec836e40",
         "type": "github"
       },
       "original": {
@@ -251,11 +266,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1728825236,
-        "narHash": "sha256-GJqOOJLm6NFCOFQV0hzjmeLv6/mgD/h+y2oFGYjcVUc=",
+        "lastModified": 1728836804,
+        "narHash": "sha256-h0osFav6gem66yIZYpGruvN7fYAfLIklcK29BuBPLbg=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "05a5e0b4f1ced12f2a0330132f37b0081d7a5e4d",
+        "rev": "5c3bd8e93d9f25be3e16a0445ba6fce8d30b6d73",
         "type": "github"
       },
       "original": {
@@ -555,6 +570,7 @@
     "root": {
       "inputs": {
         "ags": "ags",
+        "catppuccin": "catppuccin",
         "chaotic": "chaotic",
         "home-manager": "home-manager_2",
         "hyprland": "hyprland",
