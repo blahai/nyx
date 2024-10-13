@@ -19,12 +19,35 @@
       };
       efi.canTouchEfiVariables = true;
     };
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_cachyos;
+    kernel = {
+      sysctl ={
+        "vm.max_map_count" = 2147483642;
+      };
+    };
+  };
+
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 75;
   };
 
   networking = {
     hostName = "nyx";
     networkmanager.enable = true;
+    stevenblack = {
+      enable = true;
+      block = [
+      "fakenews"
+      "gambling"
+      ];
+    };
+    nameservers = [
+      "1.1.1.1"
+      "1.0.0.1"
+      "9.9.9.9"
+    ];
   };
 
   time.timeZone = "Europe/Helsinki";
@@ -69,12 +92,13 @@
   users.users.pingu = {
     isNormalUser = true;
     description = "Elissa";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
     packages = with pkgs; [
       floorp
       vesktop
-
+      alacritty
+      kitty
     ];
   };
 
@@ -83,12 +107,11 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     verbose = true;
+    backupFileExtension = "bak";
     users = {
       "pingu" = import ./home.nix;
     };
   };
-
-  virtualisation.docker.enable = true;
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
@@ -111,7 +134,7 @@
     firefox.enable = true;
     
     fish.enable = true;
-    
+
     hyprland = {
       enable = true;
       package = inputs.hyprland.packages."${pkgs.system}".hyprland;
@@ -125,7 +148,10 @@
     nh = {
       enable = true;
       flake = "/home/pingu/.config/nixos";
-
+      clean = {
+	enable = true;
+	extraArgs = "--keep-since 5d --keep 5";
+      };
     };
 
     nix-ld.enable = true;
@@ -140,32 +166,22 @@
   nixpkgs.config.allowUnfree = true;
 
   nix = {
+    package = pkgs.lix;
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [ "nix-command" "flakes" "auto-allocate-uids" ];
+      max-jobs = "auto";
+      sandbox = true;
       auto-optimise-store = true;
-      substituters = [
-        "https://hyprland.cachix.org"
-        "https://cache.nixos.org"
-        "https://nixpkgs-wayland.cachix.org"
-        "https://nix-community.cachix.org"
-      ];
-      trusted-public-keys = [
-        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-        "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        ];
+      keep-going = true;
+      warn-dirty = false;
+      use-xdg-base-directories = true;
       trusted-users = [ "@wheel" "pingu" "root" ];
-    };
-    gc = {
-      automatic = true;
-      persistent = true;
-      dates = "daily";
-      options = "--delete-older-than +5";
     };
   };
 
   environment.systemPackages = with pkgs; [
+    gnome-tweaks # TODO remove
+    btrfs-progs
     hyprcursor
     grimblast  
     neovim
@@ -181,6 +197,9 @@
     ripgrep
     clang
     go
+    lua
+    lua-language-server
+    nil
     nixfmt-classic
     zip
     nodejs
@@ -191,7 +210,7 @@
     bibata-cursors
     spotify
     jq
-    gnome.gnome-control-center
+    gnome-control-center
     pavucontrol
     icon-library
     bat
@@ -201,27 +220,9 @@
     glib
     cliphist
     playerctl
-    socat
-    adwaita-qt6
     material-icons
     material-design-icons
     material-symbols
-    ddcutil
-    (python311.withPackages (ps: with ps; [ 
-      pillow
-      material-color-utilities
-      materialyoucolor
-      wheel
-      setuptools-scm
-      libsass
-      pywayland
-      psutil
-      numpy
-      requests
-      pyxdg
-    ]))
-    pywal
-    dart-sass
     imagemagick
   ];
 
@@ -235,6 +236,7 @@
     google-fonts
     material-symbols
     material-icons
+    maple-mono
   ];
 
   programs.gnupg.agent = {

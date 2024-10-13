@@ -9,12 +9,12 @@
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "ahci" "xhci_pci" "usbhid" "uas" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.kernelModules = [ "kvm-amd" "amd-pstate" "amdgpu" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/465cd1e9-3e0f-4800-a28e-bde99c2fc6f8";
+    { device = "/dev/disk/by-uuid/4f1b81d9-6ca7-486c-bf85-72dcc72f525d";
       fsType = "ext4";
     };
 
@@ -24,22 +24,21 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  #fileSystems."/var/lib/docker/overlay2/7494aad14765ade76a2ecf82e21a3d20996943b4b3260e74feeeb01734c9db41/merged" =
-  #  { device = "overlay";
-  #    fsType = "overlay";
-  #  };
+  fileSystems."/media" =
+    { device = "/dev/disk/by-uuid/ec917008-d804-4134-82b6-f277b6ff9d77";
+      fsType = "btrfs";
+      options = [ "async" "auto" "noatime" "rw" "subvolid=5" "subvol=/" ];
+    };
+
+  fileSystems."/mnt/arch" =
+    { device = "/dev/disk/by-uuid/beb59913-0dd6-40e5-bd0b-b004b891d9d3";
+      fsType = "ext4";
+    };
 
   fileSystems."/mnt/ext" =
     { device = "/dev/disk/by-uuid/43280a82-cf9a-452e-9bdc-a8cc66ccd7c8";
       fsType = "btrfs";
       options = [ "async" "auto" "nofail" "noatime" ];
-    };
-
-  fileSystems."/mnt/ext/storage" =
-    { device = "/dev/disk/by-uuid/349dd615-0054-453e-b6bd-a15938bf8366";
-      fsType = "btrfs";
-      options = [ "async" "auto" "nofail" "noatime" ];
-      depends = [ "/mnt/ext" ];
     };
 
   swapDevices =
@@ -51,10 +50,9 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.docker0.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp13s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp14s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode = true;
 }
