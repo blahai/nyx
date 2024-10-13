@@ -4,7 +4,7 @@
     settings = {
       term = "xterm-256color";
       title = "foot";
-      font = "SpaceMono Nerd Font:size11";
+      font = "SpaceMono Nerd Font:size=11";
       letter-spacing = 0;
       pad = "25x25";
       cursor = {
