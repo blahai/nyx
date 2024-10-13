@@ -1,8 +1,4 @@
 { config, lib, pkgs, ... }: {
-  imports = [
-    ../starship/default.nix
-  ];
-
   programs.fish = {
     enable = true;
 

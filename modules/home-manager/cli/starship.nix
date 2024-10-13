@@ -33,7 +33,7 @@
           "Pictures" = " ";
           "Videos" = " ";
           "iso" = "󰌽 ";
-          ".config" = "";
+          ".config" = " ";
         };
       };
 

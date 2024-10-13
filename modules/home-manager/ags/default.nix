@@ -5,25 +5,16 @@
   home.packages = with pkgs; [
     bun
     dart-sass
+    swww
     fd
     brightnessctl
-    swww
-    inputs.matugen.packages.${system}.default
     slurp
     wl-clipboard
-    wayshot
     swappy
     hyprpicker
-    pavucontrol
-    networkmanager
-    gtk3
+    pwvucontrol
+    which
   ];
-
-  #home.activation = {
-  #  linkAgs = lib.hm.dag.entryAfter ["writeBoundary"] ''
-  #    ln -sf ~/.config/nixos/modules/home-manager/ags/ags ~/.config/ags
-  #  '';
-  #};
 
   programs.ags = {
     enable = true;

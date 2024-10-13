@@ -1,85 +1,82 @@
-{ pkgs, lib, config, ... }:
-{
+{ pkgs, lib, config, ... }: {
   programs.fastfetch = {
     enable = true;
     settings = {
       logo = {
         type = "sixel";
-        source = "~/Pictures/nix-Wallpaper.png";
+        source = "~/Pictures/gay.png";
         width = 32;
       };
 
-      display = {
-        separator = "  ";
-      };
+      display = { separator = "  "; };
 
       modules = [
         {
-            type = "custom";
-            format = "┌─────────── \u001b[1mHardware Information\u001b[0m ───────────┐";
+          type = "custom";
+          format = "┌─────────── Hardware Information ───────────┐";
         }
         {
-            type = "cpu";
-            key = "  ";
+          type = "cpu";
+          key = "  ";
         }
         {
-            type = "gpu";
-            key = "  ﬙";
+          type = "gpu";
+          key = "  ﬙";
         }
         {
-            type = "memory";
-            key = "  󰑭";
+          type = "memory";
+          key = "  󰑭";
         }
         {
-            type = "swap";
-            key = "  󰓡";
+          type = "swap";
+          key = "  󰓡";
         }
         {
-            type = "custom";
-            format = "├─────────── \u001b[1mSoftware Information\u001b[0m ───────────┤";
+          type = "custom";
+          format = "├─────────── Software Information ───────────┤";
         }
         {
-            type = "title";
-            key = "  ";
-            format = "{1}@{2}";
+          type = "title";
+          key = "  ";
+          format = "{1}@{2}";
         }
         {
-            type = "os";
-            key = "  ";
+          type = "os";
+          key = "  ";
         }
         {
-            type = "kernel";
-            key = "  ";
-            format = "{1} {2}";
+          type = "kernel";
+          key = "  ";
+          format = "{1} {2}";
         }
         {
-            type = "wm";
-            key =  "";
+          type = "wm";
+          key = "  ";
         }
         {
-            type = "shell";
-            key = "  ";
+          type = "shell";
+          key = "  ";
         }
         {
-            type = "terminal";
-            key = "  ";
+          type = "terminal";
+          key = "  ";
         }
         {
-            type = "uptime";
-            key = "  󰅐";
+          type = "uptime";
+          key = "  󰅐";
         }
         {
-            type = "media",;
-            key = "  󰝚";
+          type = "media";
+          key = "  󰝚";
         }
         {
-            type = "custom";
-            format = "└────────────────────────────────────────────┘";
+          type = "custom";
+          format = "└────────────────────────────────────────────┘";
         }
         {
-            type = "colors";
-            paddingLeft = 2;
-            symbol = "circle";
+          type = "colors";
+          paddingLeft = 2;
+          symbol = "circle";
         }
       ];
     };

@@ -5,7 +5,6 @@
     ./hyprland/keybinds.nix
     ./hyprland/execs.nix
     ./hyprlock.nix
-    ../ags/default.nix
   ];
 
   home.packages = with pkgs; [
@@ -16,7 +15,6 @@
     brightnessctl
     xwayland
     swww
-    mpvpaper
     grim
     slurp
     libnotify
@@ -54,10 +52,10 @@
 
       general = {
         # Gaps and border
-        gaps_in = 4;
-        gaps_out = 5;
-        gaps_workspaces = 50;
-        border_size = 3;
+        gaps_in = 8;
+        gaps_out = 8;
+        gaps_workspaces = 0;
+        border_size = 2;
 
         # Fallback colours
         "col.active_border" = "rgba(0DB7D4FF)";
@@ -83,10 +81,10 @@
           xray = true;
           special = true;
           new_optimizations = true;
-          size = 14;
-          passes = 4;
+          size = 2;
+          passes = 2;
           brightness = 1;
-          noise = 0.05;
+          noise = 1.17e-2;
           contrast = 1;
           popups = true;
           popups_ignorealpha = 0.6;

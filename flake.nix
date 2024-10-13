@@ -1,14 +1,16 @@
 {
-  description = "A very basic flake";
+  description = "Elissa's funny little flake";
 
   nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org"
       "https://hyprland.cachix.org/"
+      "https://anyrun.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
     ];
 
     auto-optimise-store = true;
@@ -36,17 +38,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    more-waita = {
-      url = "github:somepaulo/MoreWaita";
-      flake = false;
-    };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = { self, nixpkgs, chaotic, home-manager, ... }@inputs:
@@ -67,7 +64,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./hosts/helios/configuration.nix
-            inputs.home-manager.nixosModules.default
+            # inputs.home-manager.nixosModules.default
             chaotic.nixosModules.default
           ];
         };
