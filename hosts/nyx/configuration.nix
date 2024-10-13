@@ -4,7 +4,7 @@
   imports =
     [ 
       ./hardware-configuration.nix
-      ../../modules/nixos/games/default.nix
+      ../../modules/nixos/default.nix
       inputs.home-manager.nixosModules.default
     ];
 
@@ -180,7 +180,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    gnome-tweaks # TODO remove
     btrfs-progs
     hyprcursor
     grimblast  
