@@ -149,8 +149,8 @@
       enable = true;
       flake = "/home/pingu/.config/nixos";
       clean = {
-	enable = true;
-	extraArgs = "--keep-since 5d --keep 5";
+        enable = true;
+        extraArgs = "--keep-since 5d --keep 5";
       };
     };
 

@@ -10,9 +10,7 @@
         no_fade_out = true;
       };
 
-      backgruond = {
-        color = "rgba(000000FF)";
-      };
+      backgruond = { color = "rgba(000000FF)"; };
 
       input-field = [{
         monitor = "";
@@ -31,12 +29,12 @@
 
       label = [
         { # Clock
-          monitor  = "";
-          text     = "$TIME";
-          shadow_passes  = 1;
-          shadow_boost  = 0.5;
-          color    = "rgba(FFFFFFFF)";
-          font_size   = "65";
+          monitor = "";
+          text = "$TIME";
+          shadow_passes = 1;
+          shadow_boost = 0.5;
+          color = "rgba(FFFFFFFF)";
+          font_size = "65";
           font_family = "Rubik Light";
 
           position = "0, 300";
@@ -58,12 +56,12 @@
 
         { # lock icon
           monitor = "";
-          text    = "lock";
-          shadow_passes   = 1;
-          shadow_boost   = 0.5;
-          color     = "rgba(FFFFFFFF)";
-          font_size    = "21";
-          font_family  = "Material Symbols Rounded";
+          text = "lock";
+          shadow_passes = 1;
+          shadow_boost = 0.5;
+          color = "rgba(FFFFFFFF)";
+          font_size = "21";
+          font_family = "Material Symbols Rounded";
 
           position = "0, 65";
           halign = "center";
@@ -75,9 +73,9 @@
           text = "locked";
           shadow_passes = 1;
           shadow_boost = 0.5;
-          color     = "rgba(FFFFFFFF)";
-          font_size    = "14";
-          font_family   = "Rubik Light";
+          color = "rgba(FFFFFFFF)";
+          font_size = "14";
+          font_family = "Rubik Light";
           position = "0, 45";
           halign = "center";
           valign = "center";
