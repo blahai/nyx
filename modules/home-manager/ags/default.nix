@@ -5,6 +5,7 @@
   home.packages = with pkgs; [
     bun
     dart-sass
+    sassc
     swww
     fd
     brightnessctl
