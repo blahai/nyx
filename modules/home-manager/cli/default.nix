@@ -5,5 +5,6 @@
     ./fish/default.nix
     ./alacritty/default.nix
     ./foot/default.nix
+    ./wezterm/default.nix
   ];
 }
