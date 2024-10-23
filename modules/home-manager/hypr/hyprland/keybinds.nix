@@ -3,6 +3,10 @@
 
     bindm = [ "Super, mouse:272, movewindow" "Super, mouse:273, resizewindow" ];
 
+    bindn = [
+      " , up, pass, JKPS"
+    ];
+
     bind = [
       "Super, mouse_up, workspace, +1"
       "Super, mouse_down, workspace, -1"
@@ -11,7 +15,7 @@
 
       "Super, R, exec, ${pkgs.anyrun}/bin/anyrun"
       "Super, W, exec, ${pkgs.floorp}/bin/floorp"
-      "Super, Q, exec, ${pkgs.foot}/bin/foot"
+      "Super, Q, exec, wezterm"
       "Super, C, killactive"
       "Super, V, togglefloating"
       "Super, E, exec, ${pkgs.nautilus}/bin/nautilus -w"
@@ -26,6 +30,24 @@
       "Super + Control, R, exec, pkill ags; ags"
       "Super, Tab, exec, ags -t launcher"
       "Super, X, exec, ags -t powermenu"
+
+      ## Hyprland stuff
+      "Super, Z, movewindow"
+      
+      # Swap windows
+      "Super+Shift, left, movewindow, l"
+      "Super+Shift, right, movewindow, r"
+      "Super+Shift, up, movewindow, u"
+      "Super+Shift, down, movewindow, d"
+
+      # Move focus
+      "Super, left, movefocus, l"
+      "Super, right, movefocus, r"
+      "Super, up, movefocus, u"
+      "Super, down, movefocus, d"
+
+      # Fullscreen
+      "Super+Shift, F, fullscreen, 0"
 
     ] ++ map (n:
       "Alt, ${toString n}, movetoworkspacesilent, ${

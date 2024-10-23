@@ -9,9 +9,11 @@
     windowrule = [
       "noblur,.*"
       "workspace special, spotify"
+      "workspace 11 silent, JKPS"
       "workspace 3 silent, vesktop"
       "workspace 1 silent, floorp"
       "float, ^(blueberry.py)$"
+      "float, ^(JKPS)(.*)"
     ];
 
     windowrulev2 = [
