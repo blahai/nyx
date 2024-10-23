@@ -229,7 +229,7 @@
     iosevka-comfy.comfy
     fira-code
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-emoji
     nerdfonts
     google-fonts
