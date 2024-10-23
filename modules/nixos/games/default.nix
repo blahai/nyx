@@ -1,4 +1,13 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, inputs, ... }: {
+
+  nixpkgs = {
+    overlays = [
+      inputs.nur.overlay
+    ];
+    config = {
+      allowUnfree = true;
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     protonup-qt
@@ -6,6 +15,7 @@
     osu-lazer-bin
     obs-studio
     davinci-resolve
+    nur.repos.reedrw.jkps
   ];
 
   programs = {

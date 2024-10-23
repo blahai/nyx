@@ -24,6 +24,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    nur.url = "github:nix-community/NUR";
 
     ags = {
       url = "github:Aylur/ags";
@@ -56,7 +57,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, chaotic, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, chaotic, nur, home-manager, ... }@inputs:
     let
       system = "x86_64-linux";
     in {
