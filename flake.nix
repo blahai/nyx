@@ -20,7 +20,6 @@
     auto-optimise-store = true;
   };
 
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
@@ -38,6 +37,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    disko = { 
+      url = "github:nix-community/disko/master";
+      inputs.nixpkgs.follows = "nixpkgs"; 
+    };
+
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,33 +54,40 @@
 
     wezterm.url = "github:wez/wezterm?dir=nix";
 
-    catppuccin = {
-      url = "github:catppuccin/nix";
-    };
+    catppuccin = { url = "github:catppuccin/nix"; };
 
     hyprland.url = "github:hyprwm/Hyprland";
+
+    zen-browser.url = "github:ch4og/zen-browser-flake";
+
   };
 
-  outputs = { self, nixpkgs, chaotic, nur, home-manager, ... }@inputs:
-    let
+  outputs = { self, nixpkgs, chaotic, nur, home-manager, disko, ... }@inputs:
+    let 
       system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
     in {
       nixosConfigurations = {
         nyx = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
           modules = [
             ./hosts/nyx/configuration.nix
             inputs.home-manager.nixosModules.default
             chaotic.nixosModules.default
           ];
         };
-        
+
         helios = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
           modules = [
             ./hosts/helios/configuration.nix
             # inputs.home-manager.nixosModules.default
             chaotic.nixosModules.default
+          ];
+        };
+
+        theia = nixpkgs.lib.nixosSystem {
+          modules = [
+            ./hosts/theia/configuration.nix
+            disko.nixosModules.disko
           ];
         };
       };
