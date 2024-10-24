@@ -65,10 +65,10 @@
   outputs = { self, nixpkgs, chaotic, nur, home-manager, disko, ... }@inputs:
     let 
       system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
     in {
       nixosConfigurations = {
         nyx = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
           modules = [
             ./hosts/nyx/configuration.nix
             inputs.home-manager.nixosModules.default
