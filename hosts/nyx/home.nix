@@ -16,8 +16,8 @@
 
   home.stateVersion = "24.05";
 
-  home.packages = [
-
+  home.packages = with pkgs; [
+    obsidian
   ];
 
   home.sessionVariables = {
