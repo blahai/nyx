@@ -41,7 +41,15 @@
   };
 
   networking = {
+    enableIPv6 = false;
+    firewall = { allowedTCPPorts = [ 
+      80 # HTTP
+      443 # HTTPS
+      222 # git over ssh
+    ]; };
     hostName = "theia";
+    nameservers = [ "1.1.1.1" "8.8.8.8" "9.9.9.9" ];
+    domain = "theia.blahai.gay";
     useDHCP = lib.mkDefault false;
     defaultGateway = {
       address = "178.63.247.183";
@@ -66,8 +74,77 @@
   };
 
   services = {
+
+    caddy = {
+      enable = true;
+      virtualHosts = {
+        "git.blahai.gay" = {
+          extraConfig = ''
+            reverse_proxy localhost:3000
+          '';
+        };
+
+        "vault.blahai.gay" = {
+          extraConfig = ''
+            reverse_proxy localhost:8222 {
+              header_up X-Real-IP {remote_host}
+            }
+          '';
+        };
+
+        "search.blahai.gay" = {
+          extraConfig = ''
+            reverse_proxy localhost:8888
+          '';
+        };
+      };
+    };
+
+    forgejo = {
+      enable = true;
+      settings = {
+        DEFAULT.APP_NAME = "githai";
+        federation.ENABLED = true;
+        server = {
+          ROOT_URL = "https://git.blahai.gay";
+          DOMAIN = "git.blahai.gay";
+          SSH_PORT = 222;
+          SSH_LISTEN_PORT = 222;
+        };
+      };
+    };
+
+    vaultwarden = {
+      enable = true;
+      config = {
+        DOMAIN = "https://vault.blahai.gay";
+        ROCKET_PORT = 8222;
+      };
+    };
+
+    searx = {
+      enable = true;
+      settings = {
+        use_default_settings = true;
+        server = {
+          port = 8888;
+          secret_key = "7360d3df7c08ce681cf6d5122e3e182de2c5205e962766abd3e6dfc8dec1b683";
+        };
+        general = {
+          instance_name = "searchai";
+          debug = false;
+        };
+        search = {
+          safe_search = 1;
+          autocomplete = "google";
+          default_lang = "en";
+        };
+      };
+    };
+
     openssh = {
       enable = true;
+      openFirewall = true;
       settings = { PasswordAuthentication = false; };
     };
 
