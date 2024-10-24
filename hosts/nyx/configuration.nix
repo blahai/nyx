@@ -27,6 +27,13 @@
     };
   };
 
+  virtualisation = {
+    docker = {
+      enable = true;
+      storageDriver = "btrfs";
+    };
+  };
+
   zramSwap = {
     enable = true;
     algorithm = "zstd";
@@ -75,6 +82,10 @@
       };
     };
     
+    cloudflared = {
+      enable = true;
+    };
+
     gnome.gnome-keyring.enable = true;
 
     pipewire = {
@@ -92,11 +103,12 @@
   users.users.pingu = {
     isNormalUser = true;
     description = "Elissa";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.fish;
     packages = with pkgs; [
       floorp
       vesktop
+      element-desktop
       alacritty
       kitty
     ];
@@ -167,6 +179,7 @@
 
   nix = {
     package = pkgs.lix;
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     settings = {
       experimental-features = [ "nix-command" "flakes" "auto-allocate-uids" ];
       max-jobs = "auto";
@@ -180,7 +193,10 @@
   };
 
   environment.systemPackages = with pkgs; [
+    cloudflared
+    inputs.zen-browser.packages."${pkgs.system}".specific
     btrfs-progs
+    btop
     hyprcursor
     grimblast  
     neovim
@@ -199,6 +215,7 @@
     lua
     lua-language-server
     nil
+    nixd
     nixfmt-classic
     zip
     nodejs

@@ -1,4 +1,7 @@
 { config, lib, pkgs, ... }: {
+  home.packages = with pkgs; [
+    neofetch
+  ];
   programs.fish = {
     enable = true;
 
