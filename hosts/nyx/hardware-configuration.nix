@@ -8,7 +8,7 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "ahci" "xhci_pci" "usbhid" "uas" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "nvme" "ahci" "xhci_pci" "usbhid" "hid_generic" "uas" "sd_mod" ];
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "kvm-amd" "amd-pstate" "amdgpu" ];
   boot.extraModulePackages = [ ];
@@ -24,10 +24,10 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  fileSystems."/media" =
-    { device = "/dev/disk/by-uuid/ec917008-d804-4134-82b6-f277b6ff9d77";
+  fileSystems."/mnt/ssd" =
+    { device = "/dev/disk/by-uuid/e4c31e1c-6667-4582-8d6a-d142d6118ce2";
       fsType = "btrfs";
-      options = [ "async" "auto" "noatime" "rw" "subvolid=5" "subvol=/" ];
+      options = [ "async" "auto" "noatime" "rw" ];
     };
 
   fileSystems."/mnt/arch" =
