@@ -15,6 +15,7 @@
       "virtio_blk"
     ];
     initrd.kernelModules = [ ];
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
     loader.grub = {
@@ -41,7 +42,7 @@
   };
 
   networking = {
-    enableIPv6 = false;
+    enableIPv6 = false; # Had to disable for now due to problems with resolving
     firewall = { allowedTCPPorts = [ 
       80 # HTTP
       443 # HTTPS
@@ -97,6 +98,19 @@
             reverse_proxy localhost:8888
           '';
         };
+
+        "status.blahai.gay" = {
+          extraConfig = ''
+            reverse_proxy localhost:3001
+          '';
+        };
+      };
+    };
+
+    uptime-kuma = {
+      enable = true;
+      settings = {
+        PORT = "3001";
       };
     };
 
