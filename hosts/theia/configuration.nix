@@ -115,6 +115,7 @@
     };
 
     forgejo = {
+      package = pkgs.forgejo;
       enable = true;
       settings = {
         DEFAULT.APP_NAME = "githai";
