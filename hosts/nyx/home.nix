@@ -2,11 +2,22 @@
 {
   imports = [
     ../../modules/home-manager/default.nix
+    inputs.catppuccin.homeManagerModules.catppuccin
   ];
 
   home.username = "pingu";
   home.homeDirectory = "/home/pingu";
 
+  gtk = {
+    enable = true;
+    catppuccin = {
+      enable = true;
+      flavor = "mocha";
+      accent = "pink";
+      size = "standard";
+      tweaks = [ "normal" ];
+    };
+  };
   home.pointerCursor = {
     gtk.enable = true;
     package = pkgs.bibata-cursors;
