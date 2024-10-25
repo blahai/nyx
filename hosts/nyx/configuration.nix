@@ -193,6 +193,9 @@
   };
 
   environment.systemPackages = with pkgs; [
+    age
+    ssh-to-age
+    sops
     cloudflared
     inputs.zen-browser.packages."${pkgs.system}".specific
     btrfs-progs
