@@ -76,18 +76,24 @@
           ];
         };
 
-        helios = nixpkgs.lib.nixosSystem {
-          modules = [
-            ./hosts/helios/configuration.nix
-            # inputs.home-manager.nixosModules.default
-            chaotic.nixosModules.default
-          ];
-        };
+        # helios = nixpkgs.lib.nixosSystem {
+        #   modules = [
+        #     ./hosts/helios/configuration.nix
+        #     # inputs.home-manager.nixosModules.default
+        #     chaotic.nixosModules.default
+        #   ];
+        # };
 
         theia = nixpkgs.lib.nixosSystem {
           modules = [
             ./hosts/theia/configuration.nix
             disko.nixosModules.disko
+          ];
+        };
+
+        epimetheus = nixpkgs.lib.nixosSystem {
+          modules = [
+            ./hosts/epimetheus/configuration.nix
           ];
         };
       };
