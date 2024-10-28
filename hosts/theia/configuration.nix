@@ -43,11 +43,16 @@
 
   networking = {
     enableIPv6 = false; # Had to disable for now due to problems with resolving
-    firewall = { allowedTCPPorts = [ 
-      80 # HTTP
-      443 # HTTPS
-      222 # git over ssh
-    ]; };
+    firewall = {
+      allowedTCPPorts = [
+        80 # HTTP
+        443 # HTTPS
+        222 # git over ssh
+      ];
+      allowedUDPPorts = [
+        25565 # minecraft
+      ];
+    };
     hostName = "theia";
     nameservers = [ "1.1.1.1" "8.8.8.8" "9.9.9.9" ];
     domain = "theia.blahai.gay";
@@ -75,6 +80,31 @@
   };
 
   services = {
+
+    earlyoom = {
+      enable = true;
+      extraArgs = let
+        avoid = lib.concatStringsSep "|" [
+          "cryptsetup"
+          "dbus-.*"
+          "gpg-agent"
+          "ssh-agent"
+          "sshd"
+          "systemd"
+          "systemd-.*"
+          "bash"
+          "fish"
+          "n?vim"
+        ];
+        prefer =
+          lib.concatStringsSep "|" [ "dotnet" "java.*" "nix" "npm" "node" ];
+      in [
+        "-g"
+        "--avoid '(^|/)(${avoid})'" # things that we want to avoid killing
+        "--prefer '(^|/)(${prefer})'" # things we want to remove fast
+      ];
+
+    };
 
     caddy = {
       enable = true;
@@ -109,9 +139,7 @@
 
     uptime-kuma = {
       enable = true;
-      settings = {
-        PORT = "3001";
-      };
+      settings = { PORT = "3001"; };
     };
 
     forgejo = {
@@ -139,18 +167,22 @@
 
     searx = {
       enable = true;
+      redisCreateLocally = true;
       settings = {
         use_default_settings = true;
         server = {
           port = 8888;
-          secret_key = "7360d3df7c08ce681cf6d5122e3e182de2c5205e962766abd3e6dfc8dec1b683";
+          secret_key =
+            "7360d3df7c08ce681cf6d5122e3e182de2c5205e962766abd3e6dfc8dec1b683";
         };
+        ui = { infinite_scroll = true; };
+
         general = {
           instance_name = "searchai";
           debug = false;
         };
         search = {
-          safe_search = 1;
+          safe_search = 0;
           autocomplete = "google";
           default_lang = "en";
         };
@@ -174,6 +206,8 @@
     };
   };
 
+  programs = { nix-ld.enable = true; };
+
   users.users.root = {
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILPbmiNqoyeKXk/VopFm2cFfEnV4cKCFBhbhyYB69Fuu"
@@ -194,6 +228,24 @@
       "$y$j9T$cxwKGmzYyC1eLeIysr8r/.$dsxxxV4NvXY.Wpd9LO.RiuMQuy2lYyy2HGrk52BJX08";
   };
 
+  users.users.minecraft = {
+    isNormalUser = true;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILPbmiNqoyeKXk/VopFm2cFfEnV4cKCFBhbhyYB69Fuu" # nyx
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILLqPq70t6RbnI8UejEshYcfBP66I4OrLFjvGLLfIEXD" # laptop
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDbAlKwToOiUT6zA6qdgETTuJVRFeSjkBJWLzUWLLAtQZnPJ4gWZMxcHbkoPryY6L5DnibmqliLnAw2cjaREJw3BJ8Di0W1UdSZqZZejipjkfBBDLadckkv6WTskShyCtN/Mum8hkBMbGFrWXSM+8MPEj6pS8WgRnrHjDR27tIyUkP+f6n2B7g8z34o26jmKkIC+cLV5D3IhRhVpi49oPqrI59aWWw6ikOSITdLfdIuNxmlgD9cVhWnVohPp2hfoYF5VwIpWYUwL1zkQdiBvCXKT35DqQLy/jKcHegVHk5ZLeaZlaZ7dyiu5xnQUuTgg6m9r1VW+E3XHuRNp33SMhkGs/LVJWtx0fAEzlQDfQQl9SE2k6XXffZYSeOgFO8hYatGrfZ2Dx4yeacFnckitJglyq8SjIn5lUB4UN/48iD6v1thf0LyOy279LKsbmL90nNrRHP7ByFOTwAb1IsGMARAGeMLZfyvaOOSSfRfm0NqCpi1CV9vX5qwG3w34ifirDs=" # slogo laptop
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDAu9nk21JNaOTGBeUw3AOF0uA0ErcMf/2hvjUASXuPcBf9gI7huy0RXPvWO7JiOUorYdqMo9zB792tso4+o0RMYoAKC1A+AP0L1w8uKs4KdhbWsduEZhT3Nmp4OSFhi+Ycv2ZK6MQ52k9OVAbjT2xzyE7GSZHTPFVszr03bpeFkgDE/9K7px6r/KPKrXOn7DMRbgXkyjkOOhB8cCGW8VbJDVwz1/M3p1gfIQDZIcGvt5b6CjcuOyfYPORlcVUdRNVLxdHio4YLjKu6w2M74tVaEvRBb5fl+OTztDyENyEiGo2Pr5xYew5oIuVG4+pZZUpjxOPB+uWr8tPct/kuq/hxqJ5byrsv+bW4CNWlRxKiHC0SLtIlkEXKbCIs0IvEjbFv3tS+wSCU9qdb39yZUXknc09GUmd8ZNfsmPNAg4+1irTfSy7R24Wi76B/dEMyb6TUKm1zUfRRnTCTngr7WZAn/UcPDvwUduJu64h99TRWOtU9T2ih33xkfk3zCJpME5s=" # slogo desktop
+    ];
+    packages = with pkgs; [
+      openjdk21
+      openjdk17
+      screen
+
+    ];
+    initialHashedPassword =
+      "$y$j9T$KpQYYLB6eWfHAUo9.o/uy1$gnj/UlWLrx5XBZDm2GNdjHs2G5D3XxxqqtrCIf5MX43";
+  };
+
   environment.systemPackages = with pkgs; [
     git
     curl
@@ -203,5 +255,6 @@
     zip
     jq
     busybox
+    fish
   ];
 }
