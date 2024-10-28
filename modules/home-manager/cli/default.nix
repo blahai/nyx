@@ -1,7 +1,7 @@
 {
   imports = [
     ./starship.nix
-    ./fastfetch.nix
+    ./fastfetch/fastfetch.nix
     ./fish/default.nix
     ./alacritty/default.nix
     ./foot/default.nix
