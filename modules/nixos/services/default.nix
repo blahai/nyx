@@ -1,7 +1,8 @@
 { ... }:
 {
   imports = [
-    ./cloudflared.nix
+    # ./cloudflared.nix
     ./vpn.nix
+    ./pipewire.nix
   ];
 }
