@@ -19,18 +19,11 @@
       };
       efi.canTouchEfiVariables = true;
     };
-    kernelPackages = pkgs.linuxPackages_cachyos;
+    kernelPackages = pkgs.linuxPackages_zen;
     kernel = {
       sysctl ={
         "vm.max_map_count" = 2147483642;
       };
-    };
-  };
-
-  virtualisation = {
-    docker = {
-      enable = true;
-      storageDriver = "btrfs";
     };
   };
 
@@ -82,20 +75,9 @@
       };
     };
     
-    cloudflared = {
-      enable = true;
-    };
-
     gnome.gnome-keyring.enable = true;
 
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      jack.enable = true;
     };
-  };
 
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -103,7 +85,7 @@
   users.users.pingu = {
     isNormalUser = true;
     description = "Elissa";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "render" ];
     shell = pkgs.fish;
     packages = with pkgs; [
       floorp
@@ -192,12 +174,16 @@
     };
   };
 
+  qt.enable = true;
+
   environment.systemPackages = with pkgs; [
     age
     ssh-to-age
     sops
     cloudflared
     inputs.zen-browser.packages."${pkgs.system}".specific
+    cava
+    socat
     btrfs-progs
     btop
     hyprcursor
@@ -243,6 +229,8 @@
     material-design-icons
     material-symbols
     imagemagick
+    wireguard-tools
+    mission-center
   ];
 
   fonts.packages = with pkgs; [
