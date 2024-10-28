@@ -37,6 +37,12 @@
     };
   };
 
+  programs = {
+    virt-manager = {
+      enable = true; 
+    };
+  };
+
   users.users.pingu.extraGroups = [ "qemu-libvirtd" "libvirtd" "disk" "kvm" "docker" ];
 
   environment.systemPackages = with pkgs; [
