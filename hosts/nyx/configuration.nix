@@ -65,9 +65,15 @@
   };
 
   services = {
+    displayManager.defaultSession = "hyprland";
     xserver = {
       enable = true;
-      displayManager.gdm.enable = true;
+      displayManager = {
+        gdm = {
+          enable = true;
+          autoSuspend = false;
+        };
+      };
       desktopManager.gnome.enable = true;
       xkb = {
         layout = "us";
@@ -177,6 +183,7 @@
   qt.enable = true;
 
   environment.systemPackages = with pkgs; [
+    ffmpeg-full
     age
     ssh-to-age
     sops
