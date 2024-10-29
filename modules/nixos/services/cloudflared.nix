@@ -4,6 +4,10 @@
     ../../../secrets/secrets.nix 
   ];
 
+  services.cloudflared = {
+      enable = true;
+    };
+
   users.users.cloudflared = {
     group = "cloudflared";
     isSystemUser = true;
