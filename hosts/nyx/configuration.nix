@@ -102,6 +102,7 @@
     packages = with pkgs; [
       floorp
       vesktop
+      equibop
       element-desktop
       alacritty
       kitty
@@ -206,6 +207,13 @@
 
   environment.systemPackages = with pkgs; [
     ffmpeg-full
+    gst_all_1.gstreamer
+    gst_all_1.gst-libav
+    gst_all_1.gst-vaapi
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-rs
+    celluloid
+    mpv
     age
     ssh-to-age
     sops
