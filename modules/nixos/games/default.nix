@@ -25,6 +25,11 @@
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     };
     gamemode.enable = true;
+    alvr = {
+      enable = true;
+      package = pkgs.alvr;
+      openFirewall = true;
+    };
   };
 
   hardware = {
