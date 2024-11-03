@@ -24,6 +24,13 @@
     };
   };
 
+  nix = {
+    package = pkgs.lix;
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+    };
+  };
+
   zramSwap = {
     enable = true;
     algorithm = "zstd";
@@ -244,6 +251,13 @@
     ];
     initialHashedPassword =
       "$y$j9T$KpQYYLB6eWfHAUo9.o/uy1$gnj/UlWLrx5XBZDm2GNdjHs2G5D3XxxqqtrCIf5MX43";
+  };
+
+  users.users.nino = {
+    isNormalUser = true;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPrTDcvk5FMuNsKEJmMpKvuYyrj/p7EBRgHhXOUcqPmi"
+    ];
   };
 
   environment.systemPackages = with pkgs; [
