@@ -27,6 +27,11 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nur.url = "github:nix-community/NUR";
 
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     ags = {
       url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -64,7 +69,7 @@
 
   };
 
-  outputs = { self, nixpkgs, chaotic, nur, home-manager, disko, ... }@inputs:
+  outputs = { self, nixpkgs, chaotic, nur, home-manager, lix-module, disko, ... }@inputs:
     let 
       system = "x86_64-linux";
     in {
@@ -72,6 +77,7 @@
         nyx = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
+            lix-module.nixosModules.default
             ./hosts/nyx/configuration.nix
             inputs.home-manager.nixosModules.default
             chaotic.nixosModules.default
