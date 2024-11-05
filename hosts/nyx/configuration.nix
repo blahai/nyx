@@ -173,7 +173,6 @@
   nixpkgs.config.allowUnfree = true;
 
   nix = {
-    package = pkgs.lix;
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     settings = {
       experimental-features = [ "nix-command" "flakes" "auto-allocate-uids" ];
@@ -206,6 +205,7 @@
   qt.enable = true;
 
   environment.systemPackages = with pkgs; [
+    bottles
     ffmpeg-full
     gst_all_1.gstreamer
     gst_all_1.gst-libav
@@ -223,6 +223,7 @@
     socat
     btrfs-progs
     btop
+    rocmPackages.rocm-smi 
     hyprcursor
     grimblast  
     neovim
