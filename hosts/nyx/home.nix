@@ -16,6 +16,7 @@
       accent = "pink";
       size = "standard";
       tweaks = [ "normal" ];
+      icon.enable = true;
     };
   };
   home.pointerCursor = {
