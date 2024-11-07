@@ -26,9 +26,7 @@
 
   nix = {
     package = pkgs.lix;
-    settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-    };
+    settings = { experimental-features = [ "nix-command" "flakes" ]; };
   };
 
   zramSwap = {
@@ -136,9 +134,15 @@
           '';
         };
 
-        "status.blahai.gay" = {
+        "kuma.blahai.gay" = {
           extraConfig = ''
             reverse_proxy localhost:3001
+          '';
+        };
+
+        "status.blahai.gay" = {
+          extraConfig = ''
+            reverse_proxy localhost:19999
           '';
         };
       };
@@ -147,6 +151,16 @@
     uptime-kuma = {
       enable = true;
       settings = { PORT = "3001"; };
+    };
+
+    netdata = {
+      enable = true;
+      config.global = {
+        "memory mode" = "ram";
+        "debug log" = "none";
+        "access log" = "none";
+        "error log" = "syslog";
+      };
     };
 
     forgejo = {
@@ -251,6 +265,13 @@
     ];
     initialHashedPassword =
       "$y$j9T$KpQYYLB6eWfHAUo9.o/uy1$gnj/UlWLrx5XBZDm2GNdjHs2G5D3XxxqqtrCIf5MX43";
+  };
+
+  users.users.shizu = {
+    isNormalUser = true;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ2zPly//j7KGHTqd/KZ7Hcbw8vnNJzAZCbYcKBzx2jW"
+    ];
   };
 
   users.users.nino = {
