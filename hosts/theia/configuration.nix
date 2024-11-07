@@ -26,7 +26,11 @@
 
   nix = {
     package = pkgs.lix;
-    settings = { experimental-features = [ "nix-command" "flakes" ]; };
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      auto-optimise-store = true;
+      sandbox = true;
+    };
   };
 
   zramSwap = {
