@@ -80,7 +80,6 @@
           autoSuspend = false;
         };
       };
-      desktopManager.gnome.enable = true;
       xkb = {
         layout = "us";
         variant = "euro";
@@ -166,7 +165,7 @@
     git = {
       enable = true;
       lfs.enable = true;
-
+      
     };
   };
 
@@ -174,6 +173,7 @@
 
   nix = {
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    package = pkgs.lix;
     settings = {
       experimental-features = [ "nix-command" "flakes" "auto-allocate-uids" ];
       max-jobs = "auto";
@@ -205,6 +205,10 @@
   qt.enable = true;
 
   environment.systemPackages = with pkgs; [
+    matugen
+    nautilus
+    diff-so-fancy
+    eog
     bottles
     ffmpeg-full
     gst_all_1.gstreamer
