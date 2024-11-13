@@ -13,7 +13,6 @@
     protonup-qt
     prismlauncher
     osu-lazer-bin
-    obs-studio
     davinci-resolve
     nur.repos.reedrw.jkps
   ];
@@ -30,6 +29,14 @@
       package = pkgs.alvr;
       openFirewall = true;
     };
+
+    obs-studio = {
+      enable = true;
+      plugins = with pkgs.obs-studio-plugins; [ 
+        obs-pipewire-audio-capture
+        obs-vaapi
+      ];
+    };
   };
 
   hardware = {
@@ -38,6 +45,14 @@
     graphics = {
       enable = true;
       enable32Bit = true;
+      extraPackages = with pkgs; [ 
+        mesa
+        egl-wayland
+        rocmPackages.clr.icd
+        amdvlk
+        libva
+        libva-utils
+      ];
     };
   };
 }
