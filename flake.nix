@@ -33,6 +33,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     ags = {
       url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -99,7 +104,7 @@
         };
 
         epimetheus = nixpkgs.lib.nixosSystem {
-          modules = [ ./hosts/epimetheus/configuration.nix ];
+          modules = [ ./hosts/epimetheus/configuration.nix disko.nixosModules.disko ];
         };
       };
     };
