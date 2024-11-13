@@ -7,11 +7,13 @@
 
     interactiveShellInit = ''
       function fish_greeting
-        echo The time is (set_color purple; date +%T; set_color purple)
-        if test -z $SSH_CLIENT;
-          fastfetch
-        else
-          neofetch
+        if test -z $DEVSHELL_NIX;
+          echo The time is (set_color purple; date +%T; set_color purple)
+          if test -z $SSH_CLIENT;
+            fastfetch
+          else
+            neofetch
+          end
         end
       end
     '';
@@ -56,6 +58,12 @@
     };
 
     functions = {
+      os-age = ''
+        function os-age
+          stat / | awk '/Birth: /{print $2 " " substr($3,1,5)}'
+        end
+      '';
+
       # Credit for these 3
       # https://www.reddit.com/r/linux/comments/1fq0za8/comment/lp1ybdn
       disks = ''
