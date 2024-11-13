@@ -2,9 +2,9 @@
   wayland.windowManager.hyprland.settings = {
 
     bindle = [
-      "bindl = ,XF86AudioMute, exec, playerctl --player=spotify,%any play-pause"
-      "bindle= ,XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
-      "bindle= ,XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+      ",XF86AudioMute, exec, playerctl --player=spotify,%any play-pause"
+      ",XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+      ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
     ];
 
     bindm = [ "Super, mouse:272, movewindow" "Super, mouse:273, resizewindow" ];
