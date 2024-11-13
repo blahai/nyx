@@ -1,15 +1,26 @@
 { pkgs, config, inputs, ... }: {
   wayland.windowManager.hyprland.settings = {
 
+    bindle = [
+      "bindl = ,XF86AudioMute, exec, playerctl --player=spotify,%any play-pause"
+      "bindle= ,XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+      "bindle= ,XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+    ];
+
     bindm = [ "Super, mouse:272, movewindow" "Super, mouse:273, resizewindow" ];
 
-    bindn = [
-      " , up, pass, JKPS"
+    bindn = [ " , up, pass, JKPS" ];
+
+    binde = [ # Window split ratio
+      "Super, Semicolon, splitratio, -0.1"
+      "Super, Apostrophe, splitratio, 0.1"
     ];
 
     bind = [
       "Super, mouse_up, workspace, +1"
       "Super, mouse_down, workspace, -1"
+      "Super, Page_up, workspace, +1"
+      "Super, Page_down, workspace, +1"
 
       "Super+Shift, S, togglespecialworkspace"
 
@@ -33,7 +44,7 @@
 
       ## Hyprland stuff
       "Super, Z, movewindow"
-      
+
       # Swap windows
       "Super+Shift, left, movewindow, l"
       "Super+Shift, right, movewindow, r"
