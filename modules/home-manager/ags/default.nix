@@ -15,6 +15,7 @@
     hyprpicker
     pwvucontrol
     which
+    python312Packages.gpustat
   ];
 
   programs.ags = {
@@ -27,6 +28,7 @@
     # additional packages to add to gjs's runtime
     extraPackages = with pkgs; [
       accountsservice
+      gtk-session-lock
     ];
   };
 }

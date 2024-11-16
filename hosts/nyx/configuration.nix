@@ -1,12 +1,11 @@
 { config, pkgs, inputs, system, lib, ... }:
 
 {
-  imports =
-    [ 
-      ./hardware-configuration.nix
-      ../../modules/nixos/default.nix
-      inputs.home-manager.nixosModules.default
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../modules/nixos/default.nix
+    inputs.home-manager.nixosModules.default
+  ];
 
   documentation.nixos.enable = false;
 
@@ -25,11 +24,7 @@
     #   package = pkgs.zfs_unstable;
     # };
     kernelPackages = pkgs.linuxPackages_zen;
-    kernel = {
-      sysctl ={
-        "vm.max_map_count" = 2147483642;
-      };
-    };
+    kernel = { sysctl = { "vm.max_map_count" = 2147483642; }; };
   };
 
   zramSwap = {
@@ -40,20 +35,14 @@
 
   networking = {
     hostName = "nyx";
-    hostId = builtins.substring 0 8 (builtins.hashString "md5" config.networking.hostName);
+    hostId = builtins.substring 0 8
+      (builtins.hashString "md5" config.networking.hostName);
     networkmanager.enable = true;
     stevenblack = {
       enable = true;
-      block = [
-      "fakenews"
-      "gambling"
-      ];
+      block = [ "fakenews" "gambling" ];
     };
-    nameservers = [
-      "1.1.1.1"
-      "1.0.0.1"
-      "9.9.9.9"
-    ];
+    nameservers = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" ];
   };
 
   time.timeZone = "Europe/Helsinki";
@@ -85,10 +74,10 @@
         variant = "euro";
       };
     };
-    
+
     gnome.gnome-keyring.enable = true;
 
-    };
+  };
 
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -114,31 +103,30 @@
     useUserPackages = true;
     verbose = true;
     backupFileExtension = "bak";
-    users = {
-      "pingu" = import ./home.nix;
-    };
+    users = { "pingu" = import ./home.nix; };
   };
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
-    description = "polkit-gnome-authentication-agent-1";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
-    serviceConfig = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
         Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        ExecStart =
+          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
         Restart = "on-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;
       };
-  };
+    };
 
   };
 
   programs = {
     firefox.enable = true;
-    
+
     fish.enable = true;
 
     hyprland = {
@@ -146,11 +134,9 @@
       package = inputs.hyprland.packages."${pkgs.system}".hyprland;
       portalPackage = inputs.hyprland.packages."${pkgs.system}".hyprland;
     };
-    
-    direnv = {
-      enable = true;
-    };
-    
+
+    direnv = { enable = true; };
+
     nh = {
       enable = true;
       flake = "/home/pingu/.config/nixos";
@@ -165,7 +151,7 @@
     git = {
       enable = true;
       lfs.enable = true;
-      
+
     };
   };
 
@@ -189,23 +175,31 @@
         "https://hyprland.cachix.org/"
         "https://anyrun.cachix.org"
         "https://wezterm.cachix.org"
-        "https://hydra.nixos.org/" 
+        "https://hydra.nixos.org/"
       ];
-      trusted-public-keys = [ 
+      trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
         "wezterm.cachix.org-1:kAbhjYUC9qvblTE+s7S+kl5XM1zVa4skO+E/1IDWdH0="
-        "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs=" 
+        "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs="
       ];
     };
   };
 
   qt.enable = true;
 
+  environment.sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 =
+    lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" (with pkgs.gst_all_1; [
+      gst-plugins-good
+      gst-plugins-bad
+      gst-plugins-ugly
+      gst-libav
+    ]);
+
   environment.systemPackages = with pkgs; [
-    matugen
+    inputs.matugen.packages."${pkgs.system}".default
     nautilus
     diff-so-fancy
     eog
@@ -227,9 +221,9 @@
     socat
     btrfs-progs
     btop
-    rocmPackages.rocm-smi 
+    rocmPackages.rocm-smi
     hyprcursor
-    grimblast  
+    grimblast
     neovim
     wget
     git
@@ -286,6 +280,7 @@
     material-symbols
     material-icons
     maple-mono
+    maple-mono-NF
   ];
 
   programs.gnupg.agent = {

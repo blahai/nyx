@@ -1,4 +1,4 @@
-{ modulesPath, lib, pkgs, ... }: {
+{ config, modulesPath, lib, pkgs, ... }: {
   system.stateVersion = "24.11";
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];

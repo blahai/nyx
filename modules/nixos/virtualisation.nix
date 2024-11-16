@@ -1,7 +1,6 @@
-{ pkgs, lib, config, ... }:
-{
+{ pkgs, lib, config, ... }: {
   boot = {
-    initrd.kernelModules = lib.mkBefore [ 
+    initrd.kernelModules = lib.mkBefore [
       "kvm-amd"
       "vfio_pci"
       "vfio_iommu_type1"
@@ -9,7 +8,7 @@
 
       "amdgpu"
     ];
-    kernelParams = [ 
+    kernelParams = [
       "amd_iommu=on"
       "amd_iommu=pt"
       "kvm.ignore_msrs=1"
@@ -17,8 +16,12 @@
     ];
     extraModprobeConfig = ''
       softdep drm pre: vfio-pci
+      options kvm_amd nested=1
+      options kvm ignore_msrs=1 report_ignored_msrs=0
     '';
   };
+
+  hardware.ksm.enable = true;
 
   virtualisation = {
     libvirtd = {
@@ -32,22 +35,21 @@
       };
     };
 
-    docker = {
-      enable = true;
-    };
+    docker = { enable = true; };
   };
 
-  programs = {
-    virt-manager = {
-      enable = true; 
-    };
-  };
+  programs = { virt-manager = { enable = true; }; };
 
-  users.users.pingu.extraGroups = [ "qemu-libvirtd" "libvirtd" "disk" "kvm" "docker" ];
+  users.users.pingu.extraGroups =
+    [ "qemu-libvirtd" "libvirtd" "disk" "kvm" "docker" ];
 
   environment.systemPackages = with pkgs; [
+    python3 # scripts, cba to use nix shell all the time
+    usbutils
+    pciutils
     virt-manager
+    moonlight-qt # for linux vms
+    looking-glass-client # for windows vms :husk:
   ];
-
 
 }

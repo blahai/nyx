@@ -46,7 +46,7 @@
       enable = true;
       enable32Bit = true;
       extraPackages = with pkgs; [ 
-        mesa
+        mesa.drivers
         egl-wayland
         rocmPackages.clr.icd
         amdvlk
