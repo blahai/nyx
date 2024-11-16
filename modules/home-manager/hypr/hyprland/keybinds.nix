@@ -20,7 +20,7 @@
       "Super, mouse_up, workspace, +1"
       "Super, mouse_down, workspace, -1"
       "Super, Page_up, workspace, +1"
-      "Super, Page_down, workspace, +1"
+      "Super, Page_down, workspace, -1"
 
       "Super+Shift, S, togglespecialworkspace"
 
