@@ -5,8 +5,6 @@
       "vfio_pci"
       "vfio_iommu_type1"
       "vfio"
-
-      "amdgpu"
     ];
     kernelParams = [
       "amd_iommu=on"

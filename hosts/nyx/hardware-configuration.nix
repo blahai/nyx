@@ -4,46 +4,43 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.initrd.availableKernelModules = [ "nvme" "ahci" "xhci_pci" "usbhid" "hid_generic" "uas" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "kvm-amd" "amd-pstate" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/4f1b81d9-6ca7-486c-bf85-72dcc72f525d";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/4f1b81d9-6ca7-486c-bf85-72dcc72f525d";
+    fsType = "ext4";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/A32D-C27D";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/A32D-C27D";
+    fsType = "vfat";
+    options = [ "fmask=0077" "dmask=0077" ];
+  };
 
-  fileSystems."/mnt/ssd" =
-    { device = "/dev/disk/by-uuid/e4c31e1c-6667-4582-8d6a-d142d6118ce2";
-      fsType = "btrfs";
-      options = [ "async" "auto" "noatime" "rw" ];
-    };
+  fileSystems."/mnt/ssd" = {
+    device = "/dev/disk/by-uuid/e4c31e1c-6667-4582-8d6a-d142d6118ce2";
+    fsType = "btrfs";
+    options = [ "async" "auto" "noatime" "rw" ];
+  };
 
-  fileSystems."/mnt/arch" =
-    { device = "/dev/disk/by-uuid/beb59913-0dd6-40e5-bd0b-b004b891d9d3";
-      fsType = "ext4";
-    };
+  fileSystems."/mnt/arch" = {
+    device = "/dev/disk/by-uuid/beb59913-0dd6-40e5-bd0b-b004b891d9d3";
+    fsType = "ext4";
+  };
 
-  fileSystems."/mnt/ext" =
-    { device = "/dev/disk/by-uuid/43280a82-cf9a-452e-9bdc-a8cc66ccd7c8";
-      fsType = "btrfs";
-      options = [ "async" "auto" "nofail" "noatime" ];
-    };
+  fileSystems."/mnt/ext" = {
+    device = "/dev/disk/by-uuid/43280a82-cf9a-452e-9bdc-a8cc66ccd7c8";
+    fsType = "btrfs";
+    options = [ "async" "auto" "nofail" "noatime" ];
+  };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/df753d88-0883-4084-acb3-e8a1d3192603"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/df753d88-0883-4084-acb3-e8a1d3192603"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
