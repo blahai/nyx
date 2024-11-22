@@ -1,10 +1,12 @@
-{ pkgs, lib, config, ... }: {
-  boot = {
-    initrd.kernelModules = lib.mkBefore [
-      "kvm-amd"
-      "vfio_pci"
-      "vfio_iommu_type1"
-      "vfio"
+{ pkgs, lib, config, ... }:
+let enableIOMMU = true;
+in {
+  boot = lib.mkIf enableIOMMU {
+    initrd.kernelModules = lib.mkBefore [ 
+      "kvm-amd" 
+      "vfio_pci" 
+      "vfio_iommu_type1" 
+      "vfio" 
     ];
     kernelParams = [
       "amd_iommu=on"
@@ -49,5 +51,4 @@
     moonlight-qt # for linux vms
     looking-glass-client # for windows vms :husk:
   ];
-
 }
