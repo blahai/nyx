@@ -8,6 +8,7 @@ Screenshots coming soontm
 | Nyx       | Main desktop  |
 | Theia     | VPS           |
 | Helios    | Laptop        |
+| Epimethus | Custom ISO    |
 
 ### Flake layout
 
