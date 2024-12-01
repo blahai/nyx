@@ -64,6 +64,12 @@
         end
       '';
 
+      build-iso = ''
+        function build-iso
+          cd ~/.config/nixos 
+          nix build .#nixosConfigurations.epimetheus.config.system.build.isoImage
+      '';
+
       # Credit for these 3
       # https://www.reddit.com/r/linux/comments/1fq0za8/comment/lp1ybdn
       disks = ''
