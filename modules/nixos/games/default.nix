@@ -41,7 +41,7 @@
 
   hardware = {
     amdgpu.opencl.enable = true; # For davinci-resolve
-    opentabletdriver.enable = true;
+    # opentabletdriver.enable = true;
     graphics = {
       enable = true;
       enable32Bit = true;
