@@ -23,7 +23,7 @@
     #   forceImportRoot = false;
     #   package = pkgs.zfs_unstable;
     # };
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_6_12;
     kernel = { sysctl = { "vm.max_map_count" = 2147483642; }; };
   };
 
@@ -169,7 +169,7 @@
       warn-dirty = false;
       use-xdg-base-directories = true;
       trusted-users = [ "@wheel" "pingu" "root" ];
-      trusted-substituters = [
+      substituters = [
         "https://nix-community.cachix.org"
         "https://nixpkgs-unfree.cachix.org"
         "https://hyprland.cachix.org/"
@@ -217,10 +217,10 @@
     sops
     cloudflared
     inputs.zen-browser.packages."${pkgs.system}".specific
-    cava
+    # cava
     socat
     btrfs-progs
-    btop
+    btop-rocm
     rocmPackages.rocm-smi
     hyprcursor
     grimblast
@@ -236,6 +236,7 @@
     gcc
     ripgrep
     clang
+    ninja
     go
     lua
     lua-language-server
@@ -267,6 +268,9 @@
     imagemagick
     wireguard-tools
     mission-center
+    nix-output-monitor
+    speedcrunch
+    geogebra
   ];
 
   fonts.packages = with pkgs; [
@@ -275,7 +279,7 @@
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-emoji
-    nerdfonts
+    nerd-fonts.symbols-only
     google-fonts
     material-symbols
     material-icons
