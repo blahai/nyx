@@ -15,7 +15,7 @@
       "virtio_blk"
     ];
     initrd.kernelModules = [ ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_6_12;
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
     loader.grub = {
@@ -23,6 +23,10 @@
       device = "/dev/vda";
     };
   };
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "netdata"
+  ];
 
   nix = {
     package = pkgs.lix;
@@ -165,6 +169,9 @@
         "debug log" = "none";
         "access log" = "none";
         "error log" = "syslog";
+      };
+      package = pkgs.netdata.override {
+        withCloudUi = true;
       };
     };
 
