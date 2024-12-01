@@ -17,6 +17,7 @@
     git
     nixd
     pciutils
+    arch-install-scripts
   ];
 
   documentation = {
