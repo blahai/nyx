@@ -17,6 +17,13 @@
     initrd.kernelModules = [ ];
     kernelPackages = pkgs.linuxPackages_6_12;
     kernelModules = [ "kvm-amd" ];
+    kernel = {
+      sysctl = {
+        "vm.max_map_count" = 2147483642;
+        "net.ipv4.ip_forward" = 1;
+        "net.ipv6.conf.all.forwarding" = 1;
+      };
+    };
     extraModulePackages = [ ];
     loader.grub = {
       enable = true;
@@ -24,9 +31,8 @@
     };
   };
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "netdata"
-  ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "netdata" ];
 
   nix = {
     package = pkgs.lix;
@@ -94,6 +100,21 @@
   };
 
   services = {
+    tailscale = {
+      enable = true;
+      useRoutingFeatures = "server";
+      openFirewall = true;
+    };
+
+    networkd-dispatcher = {
+      enable = true;
+      rules."50-tailscale" = {
+        onState = [ "routable" ];
+        script = ''
+          ${lib.getExe pkgs.ethtool} -K ens3 rx-udp-gro-forwarding on rx-gro-list off
+        '';
+      };
+    };
 
     earlyoom = {
       enable = true;
@@ -170,9 +191,7 @@
         "access log" = "none";
         "error log" = "syslog";
       };
-      package = pkgs.netdata.override {
-        withCloudUi = true;
-      };
+      package = pkgs.netdata.override { withCloudUi = true; };
     };
 
     forgejo = {
@@ -287,5 +306,7 @@
     jq
     busybox
     fish
+    ethtool
+    networkd-dispatcher
   ];
 }
