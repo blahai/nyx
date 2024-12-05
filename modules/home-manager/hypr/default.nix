@@ -48,6 +48,9 @@
         follow_mouse = 1;
         sensitivity = 0.1;
         force_no_accel = true;
+        tablet = {
+          left_handed = true;
+        };
       };
 
       general = {
