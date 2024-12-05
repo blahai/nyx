@@ -1,12 +1,8 @@
 { config, pkgs, inputs, ... }: {
 
   nixpkgs = {
-    overlays = [
-      inputs.nur.overlay
-    ];
-    config = {
-      allowUnfree = true;
-    };
+    overlays = [ inputs.nur.overlay ];
+    config = { allowUnfree = true; };
   };
 
   environment.systemPackages = with pkgs; [
@@ -20,8 +16,10 @@
   programs = {
     steam = {
       enable = true;
-      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+      remotePlay.openFirewall =
+        true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall =
+        true; # Open ports in the firewall for Source Dedicated Server
     };
     gamemode.enable = true;
     alvr = {
@@ -32,7 +30,7 @@
 
     obs-studio = {
       enable = true;
-      plugins = with pkgs.obs-studio-plugins; [ 
+      plugins = with pkgs.obs-studio-plugins; [
         obs-pipewire-audio-capture
         obs-vaapi
       ];
@@ -41,11 +39,17 @@
 
   hardware = {
     amdgpu.opencl.enable = true; # For davinci-resolve
-    # opentabletdriver.enable = true;
+    opentabletdriver = {
+      enable = true; # For osu!
+      daemon.enable = true;
+      blacklistedKernelModules = [
+        "wacom"
+      ];
+    };
     graphics = {
       enable = true;
       enable32Bit = true;
-      extraPackages = with pkgs; [ 
+      extraPackages = with pkgs; [
         mesa.drivers
         egl-wayland
         rocmPackages.clr.icd
