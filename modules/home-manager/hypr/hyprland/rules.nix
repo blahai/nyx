@@ -10,9 +10,14 @@
       "noblur,.*"
       "workspace special, spotify"
       "workspace 11 silent, JKPS"
+      "workspace 8 silent, Element"
+      "workspace 6 silent, firefox"
+      "workspace 5 silent, ^(org.prismlauncher.PrismLauncher)$"
       "workspace 3 silent, vesktop"
+      "workspace 2 silent, ^(steam)$"
       "workspace 1 silent, floorp"
       "float, ^(blueberry.py)$"
+      "float, ^(com.github.Aylur.ags)$"
       "float, ^(JKPS)(.*)"
     ];
 
