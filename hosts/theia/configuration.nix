@@ -31,9 +31,6 @@
     };
   };
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "netdata" ];
-
   nix = {
     package = pkgs.lix;
     settings = {
@@ -171,29 +168,12 @@
             reverse_proxy localhost:3001
           '';
         };
-
-        "status.blahai.gay" = {
-          extraConfig = ''
-            reverse_proxy localhost:19999
-          '';
-        };
       };
     };
 
     uptime-kuma = {
       enable = true;
       settings = { PORT = "3001"; };
-    };
-
-    netdata = {
-      enable = true;
-      config.global = {
-        "memory mode" = "ram";
-        "debug log" = "none";
-        "access log" = "none";
-        "error log" = "syslog";
-      };
-      package = pkgs.netdata.override { withCloudUi = true; };
     };
 
     forgejo = {
