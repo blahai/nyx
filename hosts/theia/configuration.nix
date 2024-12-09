@@ -111,7 +111,9 @@
       rules."50-tailscale" = {
         onState = [ "routable" ];
         script = ''
-          ${lib.getExe pkgs.ethtool} -K ens3 rx-udp-gro-forwarding on rx-gro-list off
+          ${
+            lib.getExe pkgs.ethtool
+          } -K ens3 rx-udp-gro-forwarding on rx-gro-list off
         '';
       };
     };
@@ -197,9 +199,19 @@
     forgejo = {
       package = pkgs.forgejo;
       enable = true;
+      lfs.enable = true;
       settings = {
+        "ui.meta" = {
+          AUTHOR = "Elissa";
+          DESCRIPTION = "My own selfhosted git place for random stuff :3";
+        };
         DEFAULT.APP_NAME = "githai";
         federation.ENABLED = true;
+        service.DISABLE_REGISTRATION = true;
+        actions = {
+          ENABLED = true;
+          DEFAULT_ACTIONS_URL = "github";
+        };
         server = {
           ROOT_URL = "https://git.blahai.gay";
           DOMAIN = "git.blahai.gay";
