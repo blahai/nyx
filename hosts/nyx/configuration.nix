@@ -82,19 +82,21 @@
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
-  users.users.pingu = {
-    isNormalUser = true;
-    description = "Elissa";
-    extraGroups = [ "networkmanager" "wheel" "input" "render" ];
-    shell = pkgs.fish;
-    packages = with pkgs; [
-      floorp
-      vesktop
-      equibop
-      element-desktop
-      alacritty
-      kitty
-    ];
+  users.users = {
+    pingu = {
+      isNormalUser = true;
+      description = "Elissa";
+      extraGroups = [ "networkmanager" "wheel" "input" "render" ];
+      shell = pkgs.fish;
+      packages = with pkgs; [
+        floorp
+        vesktop
+        equibop
+        element-desktop
+        alacritty
+        kitty
+      ];
+    };
   };
 
   home-manager = {
@@ -199,7 +201,6 @@
     ]);
 
   environment.systemPackages = with pkgs; [
-    inputs.matugen.packages."${pkgs.system}".default
     nautilus
     diff-so-fancy
     eog

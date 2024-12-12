@@ -3,7 +3,7 @@
   imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix" ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_6;
+    kernelPackages = pkgs.linuxPackages_6_12;
     kernelParams = lib.mkAfter [ "noquiet" "toram" ];
     enableContainers = false;
   };
@@ -11,13 +11,21 @@
   nixpkgs.hostPlatform = "x86_64-linux";
 
   environment.systemPackages = with pkgs; [
+    # The essentials
     neovim
     disko
     parted
     git
     nixd
     pciutils
-    arch-install-scripts
+    
+    # The installers
+    arch-install-scripts # For arch and it's 
+    xbps # Void linux
+    dnf5 # Fedora
+    debootstrap # Debin and ubuntu
+    apt # Ubuntu
+    
   ];
 
   documentation = {

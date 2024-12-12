@@ -3,7 +3,7 @@
   imports = [
     ./vpn.nix
     ./pipewire.nix
-    ./bluetooth.nix
+    # ./bluetooth.nix
     ./tailscale.nix
   ];
 }

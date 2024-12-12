@@ -1,7 +1,7 @@
 { config, pkgs, inputs, ... }: {
 
   nixpkgs = {
-    overlays = [ inputs.nur.overlay ];
+    overlays = [ inputs.nur.overlays.default ];
     config = { allowUnfree = true; };
   };
 
@@ -9,7 +9,7 @@
     protonup-qt
     prismlauncher
     osu-lazer-bin
-    davinci-resolve
+    # davinci-resolve
     nur.repos.reedrw.jkps
   ];
 
