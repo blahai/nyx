@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, lib, ... }: {
+{ inputs, config, pkgs, ... }: {
   imports = [
     ../../modules/home-manager/default.nix
     inputs.catppuccin.homeManagerModules.catppuccin
@@ -22,11 +22,25 @@
         editor = "nvim";
         autocrlf = "input";
       };
-      gpg = {
-        format = "ssh";
+      url = {
+        "ssh://git@github.com/" = { insteadOf = "https://github.com/"; };
       };
+      gpg = { format = "ssh"; };
       init = { defaultBranch = "main"; };
     };
+  };
+
+  programs.ssh = {
+    enable = true;
+    extraConfig = ''
+      Host theia
+        HostName 178.63.118.252
+        User pingu
+
+      Host artemis
+        HostName 100.106.17.39
+        User pingu
+    '';
   };
 
   gtk = {
@@ -40,6 +54,7 @@
       icon.enable = true;
     };
   };
+
   home.pointerCursor = {
     gtk.enable = true;
     package = pkgs.bibata-cursors;
