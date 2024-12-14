@@ -26,12 +26,6 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nur.url = "github:nix-community/NUR";
 
-    lix-module = {
-      url =
-        "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -72,15 +66,19 @@
 
   };
 
-  outputs = { self, nixpkgs, chaotic, nur, home-manager, lix-module, disko, ...
-    }@inputs:
+  outputs = { nixpkgs, nixpkgs-smol, chaotic, home-manager, disko, ... }@inputs:
     let system = "x86_64-linux";
     in {
       nixosConfigurations = {
         nyx = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs;
+            pkgs-smol = import nixpkgs-smol {
+              inherit system;
+              config.allowUnfree = true;
+            };
+          };
           modules = [
-            # lix-module.nixosModules.default
             ./hosts/nyx/configuration.nix
             inputs.home-manager.nixosModules.default
             chaotic.nixosModules.default
@@ -101,7 +99,8 @@
         };
 
         epimetheus = nixpkgs.lib.nixosSystem {
-          modules = [ ./hosts/epimetheus/configuration.nix disko.nixosModules.disko ];
+          modules =
+            [ ./hosts/epimetheus/configuration.nix disko.nixosModules.disko ];
         };
       };
     };
