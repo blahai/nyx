@@ -21,7 +21,10 @@
     supportedFilesystems = [ "zfs" ];
     zfs = {
       forceImportRoot = false;
+      extraPools = [ "zpool" ];
+      devNodes = "/dev/disk/by-id";
       package = pkgs-smol.zfs;
+      allowHibernation = true; # might cause corruption?
     };
     kernelPackages = pkgs-smol.linuxPackages_6_12;
     kernel = { sysctl = { "vm.max_map_count" = 2147483642; }; };

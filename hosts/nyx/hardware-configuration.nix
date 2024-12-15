@@ -12,14 +12,33 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/4f1b81d9-6ca7-486c-bf85-72dcc72f525d";
-    fsType = "ext4";
+    device = "zpool/root";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
+  };
+
+  fileSystems."/nix" = {
+    device = "zpool/nix";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
+  };
+
+  fileSystems."/var" = {
+    device = "zpool/var";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
+  };
+
+  fileSystems."/home" = {
+    device = "zpool/home";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/A32D-C27D";
+    device = "/dev/disk/by-label/BOOT";
     fsType = "vfat";
-    options = [ "fmask=0077" "dmask=0077" ];
+    options = [ "fmask=0022" "dmask=0022" ];
   };
 
   fileSystems."/mnt/ssd" = {
@@ -28,19 +47,13 @@
     options = [ "async" "auto" "noatime" "rw" ];
   };
 
-  fileSystems."/mnt/arch" = {
-    device = "/dev/disk/by-uuid/beb59913-0dd6-40e5-bd0b-b004b891d9d3";
-    fsType = "ext4";
-  };
-
   fileSystems."/mnt/ext" = {
     device = "/dev/disk/by-uuid/43280a82-cf9a-452e-9bdc-a8cc66ccd7c8";
     fsType = "btrfs";
     options = [ "async" "auto" "nofail" "noatime" ];
   };
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/df753d88-0883-4084-acb3-e8a1d3192603"; }];
+  swapDevices = [{ device = "/dev/disk/by-uuid/04281bd7-784a-4287-b4f2-ce406d2ab6ac"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
