@@ -20,6 +20,10 @@
     kernel = {
       sysctl = {
         "vm.max_map_count" = 2147483642;
+        "vm.swappiness" = 200;
+        "vm.watermark_boost_factor" = 0;
+        "vm.watermark_scale_factor" = 125;
+        "vm.page-cluster" = 0;
         "net.ipv4.ip_forward" = 1;
         "net.ipv6.conf.all.forwarding" = 1;
       };
@@ -56,6 +60,11 @@
     fsType = "vfat";
     options = [ "fmask=0022" "dmask=0022" ];
   };
+
+  swapDevices = [{
+    device = "/var/lib/swapfile";
+    size = 16 * 1024;
+  }];
 
   networking = {
     enableIPv6 = false; # Had to disable for now due to problems with resolving
