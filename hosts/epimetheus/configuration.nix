@@ -1,9 +1,14 @@
-{ pkgs, lib, modulesPath, config, ... }: {
+{ pkgs, pkgs-smol, lib, modulesPath, config, ... }: {
 
   imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix" ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_12;
+    supportedFilesystems = [ "zfs" ];
+    zfs = {
+      forceImportRoot = false;
+      package = pkgs-smol.zfs;
+    };
+    kernelPackages = pkgs-smol.linuxPackages_6_12;
     kernelParams = lib.mkAfter [ "noquiet" "toram" ];
     enableContainers = false;
   };
@@ -18,14 +23,14 @@
     git
     nixd
     pciutils
-    
+
     # The installers
-    arch-install-scripts # For arch and it's 
+    arch-install-scripts # For arch and it's
     xbps # Void linux
     dnf5 # Fedora
     debootstrap # Debin and ubuntu
     apt # Ubuntu
-    
+
   ];
 
   documentation = {
@@ -80,7 +85,7 @@
         "https://anyrun.cachix.org"
         "https://wezterm.cachix.org"
       ];
-      trusted-public-keys = [ 
+      trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="

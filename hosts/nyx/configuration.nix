@@ -18,12 +18,12 @@
       };
       efi.canTouchEfiVariables = true;
     };
-    #supportedFilesystems = [ "zfs" ];
-    #zfs = {
-    #  forceImportRoot = false;
-    #  package = pkgs.zfs;
-    #};
-    kernelPackages = pkgs.linuxPackages_6_12;
+    supportedFilesystems = [ "zfs" ];
+    zfs = {
+      forceImportRoot = false;
+      package = pkgs-smol.zfs;
+    };
+    kernelPackages = pkgs-smol.linuxPackages_6_12;
     kernel = { sysctl = { "vm.max_map_count" = 2147483642; }; };
   };
 

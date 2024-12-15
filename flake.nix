@@ -99,6 +99,12 @@
         };
 
         epimetheus = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            pkgs-smol = import nixpkgs-smol {
+              inherit system;
+            };
+          };
           modules =
             [ ./hosts/epimetheus/configuration.nix disko.nixosModules.disko ];
         };
