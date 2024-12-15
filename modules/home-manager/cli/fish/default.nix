@@ -59,13 +59,10 @@
 
     functions = {
       os-age = ''
-        function os-age
-          stat / | awk '/Birth: /{print $2 " " substr($3,1,5)}'
-        end
+        stat / | awk '/Birth: /{print $2 " " substr($3,1,5)}'
       '';
 
       build-iso = ''
-        function build-iso
           cd ~/.config/nixos 
           nix build .#nixosConfigurations.epimetheus.config.system.build.isoImage
       '';
@@ -73,21 +70,15 @@
       # Credit for these 3
       # https://www.reddit.com/r/linux/comments/1fq0za8/comment/lp1ybdn
       disks = ''
-        function disks
-          lsblk -o NAME,MOUNTPOINT,FSTYPE,FSUSE%,SIZE
-        end
+        lsblk -o NAME,MOUNTPOINT,FSTYPE,FSUSE%,SIZE
       '';
 
       gr = ''
-        function gr
-          set GROOT (git rev-parse --show-toplevel 2>/dev/null); and cd $GROOT; or return $argv
-        end
+        set GROOT (git rev-parse --show-toplevel 2>/dev/null); and cd $GROOT; or return $argv
       '';
 
       mkcd = ''
-        function mkcd
-          mkdir -p -- $argv[1] && cd $argv; or return $status
-        end
+        mkdir -p -- $argv[1] && cd $argv; or return $status
       '';
 
     };
