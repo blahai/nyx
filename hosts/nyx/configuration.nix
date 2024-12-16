@@ -18,18 +18,20 @@
       };
       efi.canTouchEfiVariables = true;
     };
-    supportedFilesystems = [ "zfs" ];
+    supportedFilesystems = [ "zfs" "ext4" "btrfs" ];
     zfs = {
       forceImportRoot = false;
       extraPools = [ "zpool" "zootfs" ];
       devNodes = "/dev/disk/by-id";
-      package = pkgs-smol.zfs;
+      package = pkgs.zfs;
       allowHibernation = true; # might cause corruption?
     };
-    kernelPackages = pkgs-smol.linuxPackages_6_12;
+    kernelPackages = pkgs.linuxPackages_6_12;
     kernel = { sysctl = { "vm.max_map_count" = 2147483642; }; };
     kernelParams = [ 
       "elevator=none" # for zfs 
+      "zfs.zfs_arc_max=8589934592"
+      "nvme.noacpi=1"
     ];
   };
 
