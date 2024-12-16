@@ -10,15 +10,31 @@ Screenshots coming soontm
 | Helios    | Laptop        |
 | Epimethus | Custom ISO    |
 
-### Flake layout
+#### Specs
+Nyx: 
+ - AMD r5 7600x (6c12t)
+ - AMD radeon rx 6700xt
+ - msi MRG B650 
+ - 32GB DDR5 6000MTS ram 
 
-to be done
+Theia:
+ - 6VCPU (AMD EPYC 9454P)
+ - 20GB ram
+
+Helios:
+ - TBD
+
+Epimethus:
+ - N/A
 
 ### Notes
 
-I recommend against using this config for even I don't know wtf I'm doing
-Also while it is usable and I am daily driving it it's still missing a lot of stuff
-With that said feel free to use anything from this flake, it's GPL for a reason :3
+I'm planning on doing an almost full rewrite of this config
+
+### Flake layout
+
+Will be done after the rewrite (probably)
+
 
 ## Credits
 
