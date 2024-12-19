@@ -7,7 +7,7 @@
     inputs.home-manager.nixosModules.default
   ];
 
-  documentation.nixos.enable = false;
+  documentation.enable = false;
 
   boot = {
     tmp.cleanOnBoot = true;
@@ -18,21 +18,9 @@
       };
       efi.canTouchEfiVariables = true;
     };
-    supportedFilesystems = [ "zfs" "ext4" "btrfs" ];
-    zfs = {
-      forceImportRoot = false;
-      extraPools = [ "zpool" "zootfs" ];
-      devNodes = "/dev/disk/by-id";
-      package = pkgs.zfs;
-      allowHibernation = true; # might cause corruption?
-    };
-    kernelPackages = pkgs.linuxPackages_6_12;
+    supportedFilesystems = [ "ext4" "btrfs" ];
+    kernelPackages = pkgs.linuxPackages_zen;
     kernel = { sysctl = { "vm.max_map_count" = 2147483642; }; };
-    kernelParams = [ 
-      "elevator=none" # for zfs 
-      "zfs.zfs_arc_max=8589934592"
-      "nvme.noacpi=1"
-    ];
   };
 
   zramSwap = {
@@ -42,15 +30,10 @@
   };
 
   networking = {
-    hostName = "nyx";
+    hostName = "nyx-vm";
     hostId = builtins.substring 0 8
       (builtins.hashString "md5" config.networking.hostName);
     networkmanager.enable = true;
-    stevenblack = {
-      enable = true;
-      block = [ "fakenews" "gambling" ];
-    };
-    nameservers = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" ];
   };
 
   time.timeZone = "Europe/Helsinki";
@@ -78,8 +61,7 @@
         };
       };
       xkb = {
-        layout = "us";
-        variant = "euro";
+        layout = "fi";
       };
     };
 
@@ -98,6 +80,7 @@
       shell = pkgs.fish;
       packages = with pkgs; [
         floorp
+	librewolf
         vesktop
         equibop
         element-desktop
@@ -209,7 +192,6 @@
     nautilus
     diff-so-fancy
     eog
-    bottles
     ffmpeg-full
     gst_all_1.gstreamer
     gst_all_1.gst-libav
@@ -221,13 +203,9 @@
     age
     ssh-to-age
     sops
-    cloudflared
-    inputs.zen-browser.packages."${pkgs.system}".specific
     # cava
     socat
-    btrfs-progs
     btop-rocm
-    rocmPackages.rocm-smi
     hyprcursor
     grimblast
     neovim
@@ -272,11 +250,10 @@
     material-design-icons
     material-symbols
     imagemagick
-    wireguard-tools
-    mission-center
     nix-output-monitor
     speedcrunch
     geogebra
+    localsend
   ];
 
   fonts.packages = with pkgs; [
@@ -296,6 +273,11 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
+  };
+
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
   };
 
   services.openssh = {

@@ -70,7 +70,7 @@
     let system = "x86_64-linux";
     in {
       nixosConfigurations = {
-        nyx = nixpkgs.lib.nixosSystem {
+        nyx-vm = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
             pkgs-smol = import nixpkgs-smol {
