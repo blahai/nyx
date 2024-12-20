@@ -26,6 +26,15 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nur.url = "github:nix-community/NUR";
 
+    # This is a private repository for now while I work on it
+    # My plan is to make it public by the end of the year
+    # for now have a look at https://github.com/redyf/Neve
+    # as that is where I *borrowed* the base from
+    haivim = {
+      url = "git+ssh://git@github.com/blahai/haivim";
+      inputs = { nixpkgs.follows = "nixpkgs"; };
+    };
+
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -101,9 +110,7 @@
         epimetheus = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
-            pkgs-smol = import nixpkgs-smol {
-              inherit system;
-            };
+            pkgs-smol = import nixpkgs-smol { inherit system; };
           };
           modules =
             [ ./hosts/epimetheus/configuration.nix disko.nixosModules.disko ];
