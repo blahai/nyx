@@ -1,4 +1,9 @@
-{ inputs, config, pkgs, ... }: {
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ../../modules/home-manager/default.nix
     inputs.catppuccin.homeManagerModules.catppuccin
@@ -23,10 +28,10 @@
         autocrlf = "input";
       };
       url = {
-        "ssh://git@github.com/" = { insteadOf = "https://github.com/"; };
+        "ssh://git@github.com/" = {insteadOf = "https://github.com/";};
       };
-      gpg = { format = "ssh"; };
-      init = { defaultBranch = "main"; };
+      gpg = {format = "ssh";};
+      init = {defaultBranch = "main";};
     };
   };
 
@@ -45,12 +50,15 @@
 
   gtk = {
     enable = true;
-    catppuccin = {
+  };
+
+  catppuccin = {
+    gtk = {
       enable = true;
       flavor = "mocha";
       accent = "pink";
       size = "standard";
-      tweaks = [ "normal" ];
+      tweaks = ["normal"];
       icon.enable = true;
     };
   };
@@ -64,9 +72,12 @@
 
   home.stateVersion = "24.11";
 
-  home.packages = with pkgs; [ obsidian ];
+  home.packages = with pkgs; [
+    obsidian
+    inputs.haivim.packages.${pkgs.system}.default
+  ];
 
-  home.sessionVariables = { EDITOR = "nvim"; };
+  home.sessionVariables = {EDITOR = "nvim";};
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

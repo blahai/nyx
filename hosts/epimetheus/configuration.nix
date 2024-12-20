@@ -1,15 +1,21 @@
-{ pkgs, pkgs-smol, lib, modulesPath, config, ... }: {
-
-  imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix" ];
+{
+  pkgs,
+  pkgs-smol,
+  lib,
+  modulesPath,
+  config,
+  ...
+}: {
+  imports = ["${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"];
 
   boot = {
-    supportedFilesystems = [ "zfs" ];
+    supportedFilesystems = ["zfs"];
     zfs = {
       forceImportRoot = false;
       package = pkgs-smol.zfs;
     };
     kernelPackages = pkgs-smol.linuxPackages_6_12;
-    kernelParams = lib.mkAfter [ "noquiet" "toram" ];
+    kernelParams = lib.mkAfter ["noquiet" "toram"];
     enableContainers = false;
   };
 
@@ -30,7 +36,6 @@
     dnf5 # Fedora
     debootstrap # Debin and ubuntu
     apt # Ubuntu
-
   ];
 
   documentation = {
@@ -56,7 +61,7 @@
 
   environment = {
     stub-ld.enable = lib.mkForce false;
-    defaultPackages = [ ];
+    defaultPackages = [];
   };
 
   xdg = {
@@ -68,10 +73,10 @@
 
   nix = {
     package = pkgs.lix;
-    nixPath = [ "nixpkgs=${config.nix.registry.nixpkgs.to.path}" ];
+    nixPath = ["nixpkgs=${config.nix.registry.nixpkgs.to.path}"];
     channel.enable = false;
     settings = {
-      experimental-features = [ "nix-command" "flakes" "auto-allocate-uids" ];
+      experimental-features = ["nix-command" "flakes" "auto-allocate-uids"];
       max-jobs = "auto";
       sandbox = true;
       auto-optimise-store = true;
@@ -92,10 +97,8 @@
         "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
         "wezterm.cachix.org-1:kAbhjYUC9qvblTE+s7S+kl5XM1zVa4skO+E/1IDWdH0="
       ];
-
     };
   };
 
   hardware.enableRedistributableFirmware = true;
-
 }

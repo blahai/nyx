@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   services = {
     pipewire = {
       enable = true;
@@ -17,10 +22,12 @@
           };
         };
         pipewire-pulse."92-low-latency" = {
-          "context.properties" = [{
-            name = "libpipewire-module-protocol-pulse";
-            args = { };
-          }];
+          "context.properties" = [
+            {
+              name = "libpipewire-module-protocol-pulse";
+              args = {};
+            }
+          ];
           "pulse.properties" = {
             "pulse.min.req" = "32/48000";
             "pulse.default.req" = "32/48000";

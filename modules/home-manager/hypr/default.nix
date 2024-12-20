@@ -1,5 +1,10 @@
-{ pkgs, config, inputs, lib, ... }: { 
-
+{
+  pkgs,
+  config,
+  inputs,
+  lib,
+  ...
+}: {
   imports = [
     ./hyprland/rules.nix
     ./hyprland/keybinds.nix
@@ -22,7 +27,7 @@
 
   xdg.portal = {
     enable = true;
-    configPackages = [ config.wayland.windowManager.hyprland.package ];
+    configPackages = [config.wayland.windowManager.hyprland.package];
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
       inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
@@ -35,7 +40,6 @@
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
 
     settings = {
-
       monitor = [
         ",prefered,auto,1"
       ];
@@ -144,7 +148,7 @@
       misc = {
         vfr = 1;
         vrr = 2;
-        
+
         middle_click_paste = false;
         focus_on_activate = true;
         animate_manual_resizes = false;
@@ -159,9 +163,6 @@
 
         initial_workspace_tracking = false;
       };
-
     };
-
-  };  
-  
+  };
 }

@@ -1,7 +1,11 @@
-{ pkgs, config, inputs, lib, ... }:
 {
+  pkgs,
+  config,
+  inputs,
+  lib,
+  ...
+}: {
   wayland.windowManager.hyprland.settings = {
-    
     workspace = [
       "special:special, on-created-empty:exec spotify"
     ];
@@ -22,7 +26,6 @@
     ];
 
     windowrulev2 = [
-      
     ];
 
     layerrule = [
@@ -47,7 +50,7 @@
       "ignorealpha 0.5, launcher"
       "blur, notifications"
       "ignorealpha 0.69, notifications"
- 
+
       "animation slide top, sideleft.*"
       "animation slide top, sideright.*"
       "blur, session"
@@ -73,6 +76,5 @@
       "blur, osk"
       "ignorealpha 0.20, osk"
     ];
-
   };
 }

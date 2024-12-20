@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   home.file."Pictures/gay.png".source = ./gay.png;
   programs.fastfetch = {
     enable = true;
@@ -9,7 +14,7 @@
         width = 32;
       };
 
-      display = { separator = "  "; };
+      display = {separator = "  ";};
 
       modules = [
         {

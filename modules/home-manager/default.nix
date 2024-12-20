@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   imports = [
     ./cli/default.nix
     ./hypr/default.nix

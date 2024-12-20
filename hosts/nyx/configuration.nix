@@ -1,6 +1,4 @@
-{ config, pkgs, pkgs-smol, inputs, system, lib, ... }:
-
-{
+{ config, pkgs, pkgs-smol, inputs, lib, ... }: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/default.nix
@@ -28,8 +26,8 @@
     };
     kernelPackages = pkgs.linuxPackages_6_12;
     kernel = { sysctl = { "vm.max_map_count" = 2147483642; }; };
-    kernelParams = [ 
-      "elevator=none" # for zfs 
+    kernelParams = [
+      "elevator=none" # for zfs
       "zfs.zfs_arc_max=8589934592"
       "nvme.noacpi=1"
     ];
@@ -84,7 +82,6 @@
     };
 
     gnome.gnome-keyring.enable = true;
-
   };
 
   hardware.pulseaudio.enable = false;
@@ -131,7 +128,6 @@
         TimeoutStopSec = 10;
       };
     };
-
   };
 
   programs = {
@@ -248,7 +244,8 @@
     lua-language-server
     nil
     nixd
-    nixfmt-classic
+    nix-output-monitor
+    alejandra
     zip
     nodejs
     typescript
@@ -274,7 +271,6 @@
     imagemagick
     wireguard-tools
     mission-center
-    nix-output-monitor
     speedcrunch
     geogebra
   ];
@@ -298,6 +294,11 @@
     enableSSHSupport = true;
   };
 
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
+
   services.openssh = {
     enable = true;
     settings = {
@@ -307,5 +308,4 @@
   };
 
   system.stateVersion = "24.05";
-
 }

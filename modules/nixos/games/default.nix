@@ -1,8 +1,12 @@
-{ config, pkgs, inputs, ... }: {
-
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   nixpkgs = {
-    overlays = [ inputs.nur.overlays.default ];
-    config = { allowUnfree = true; };
+    overlays = [inputs.nur.overlays.default];
+    config = {allowUnfree = true;};
   };
 
   environment.systemPackages = with pkgs; [

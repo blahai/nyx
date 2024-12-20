@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   programs.foot = {
     enable = true;
     settings = {
@@ -15,7 +20,7 @@
         style = "beam";
         beam-thickness = 1.5;
       };
-      colors = { alpha = 0.9; };
+      colors = {alpha = 0.9;};
     };
   };
 }

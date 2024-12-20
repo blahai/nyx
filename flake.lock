@@ -434,11 +434,11 @@
         "nixvim": "nixvim"
       },
       "locked": {
-        "lastModified": 1734646427,
-        "narHash": "sha256-+OxSwGt6O6qzGvUTAlZgLivHnYPlrZF2JybyTfdsOP0=",
+        "lastModified": 1734699281,
+        "narHash": "sha256-pjlbWc1bgrlk5amtIOFoj5g1pHAMOWKWoYlIok8NAIs=",
         "ref": "refs/heads/main",
-        "rev": "6809b030bcdad17e2007a03b8ca5ccf772c072ed",
-        "revCount": 467,
+        "rev": "81db83c82f89b5db7095b2288e5d8fc21fd254d5",
+        "revCount": 469,
         "type": "git",
         "url": "ssh://git@github.com/blahai/haivim"
       },

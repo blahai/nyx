@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs; [
     neofetch
   ];
@@ -63,8 +68,8 @@
       '';
 
       build-iso = ''
-          cd ~/.config/nixos 
-          nix build .#nixosConfigurations.epimetheus.config.system.build.isoImage
+        cd ~/.config/nixos
+        nix build .#nixosConfigurations.epimetheus.config.system.build.isoImage
       '';
 
       # Credit for these 3
@@ -80,7 +85,6 @@
       mkcd = ''
         mkdir -p -- $argv[1] && cd $argv; or return $status
       '';
-
     };
   };
 

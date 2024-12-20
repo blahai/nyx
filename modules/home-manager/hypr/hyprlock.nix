@@ -1,5 +1,4 @@
-{ config, ... }: {
-
+{config, ...}: {
   programs.hyprlock = {
     enable = true;
     settings = {
@@ -10,25 +9,28 @@
         no_fade_out = true;
       };
 
-      backgruond = { color = "rgba(000000FF)"; };
+      backgruond = {color = "rgba(000000FF)";};
 
-      input-field = [{
-        monitor = "";
-        size = "250, 50";
-        outline_thickness = 2;
-        dots_size = 0.1;
-        dots_spacing = 0.3;
-        outer_color = "rgba(8C909F55)";
-        inner_color = "rgba(0F131C11)";
-        font_color = "rgba(C2C6D6FF)";
+      input-field = [
+        {
+          monitor = "";
+          size = "250, 50";
+          outline_thickness = 2;
+          dots_size = 0.1;
+          dots_spacing = 0.3;
+          outer_color = "rgba(8C909F55)";
+          inner_color = "rgba(0F131C11)";
+          font_color = "rgba(C2C6D6FF)";
 
-        position = "0, 20";
-        halign = "center";
-        valign = "center";
-      }];
+          position = "0, 20";
+          halign = "center";
+          valign = "center";
+        }
+      ];
 
       label = [
-        { # Clock
+        {
+          # Clock
           monitor = "";
           text = "$TIME";
           shadow_passes = 1;
@@ -40,7 +42,8 @@
           position = "0, 300";
         }
 
-        { # Greeting
+        {
+          # Greeting
           monitor = "";
           text = "Hi $USER !!!";
           shadow_passes = 1;
@@ -54,7 +57,8 @@
           valign = "center";
         }
 
-        { # lock icon
+        {
+          # lock icon
           monitor = "";
           text = "lock";
           shadow_passes = 1;
@@ -68,7 +72,8 @@
           valign = "center";
         }
 
-        { # "locked" text
+        {
+          # "locked" text
           monitor = "";
           text = "locked";
           shadow_passes = 1;
@@ -91,7 +96,6 @@
         #  font_family   = "Rubik Light";
         #}
       ];
-
     };
   };
 }

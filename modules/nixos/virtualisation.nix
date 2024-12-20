@@ -1,12 +1,17 @@
-{ pkgs, lib, config, ... }:
-let enableIOMMU = true;
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
+  enableIOMMU = true;
 in {
   boot = lib.mkIf enableIOMMU {
-    initrd.kernelModules = lib.mkBefore [ 
-      "kvm-amd" 
-      "vfio_pci" 
-      "vfio_iommu_type1" 
-      "vfio" 
+    initrd.kernelModules = lib.mkBefore [
+      "kvm-amd"
+      "vfio_pci"
+      "vfio_iommu_type1"
+      "vfio"
     ];
     kernelParams = [
       "amd_iommu=on"
@@ -35,13 +40,12 @@ in {
       };
     };
 
-    docker = { enable = true; };
+    docker = {enable = true;};
   };
 
-  programs = { virt-manager = { enable = true; }; };
+  programs = {virt-manager = {enable = true;};};
 
-  users.users.pingu.extraGroups =
-    [ "qemu-libvirtd" "libvirtd" "disk" "kvm" "docker" ];
+  users.users.pingu.extraGroups = ["qemu-libvirtd" "libvirtd" "disk" "kvm" "docker"];
 
   environment.systemPackages = with pkgs; [
     python3 # scripts, cba to use nix shell all the time

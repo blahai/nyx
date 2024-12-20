@@ -32,7 +32,7 @@
     # as that is where I *borrowed* the base from
     haivim = {
       url = "git+ssh://git@github.com/blahai/haivim";
-      inputs = { nixpkgs.follows = "nixpkgs"; };
+      inputs = {nixpkgs.follows = "nixpkgs";};
     };
 
     deploy-rs = {
@@ -67,54 +67,58 @@
 
     wezterm.url = "github:wez/wezterm?dir=nix";
 
-    catppuccin = { url = "github:catppuccin/nix"; };
+    catppuccin = {url = "github:catppuccin/nix";};
 
     hyprland.url = "github:hyprwm/Hyprland";
 
     zen-browser.url = "github:ch4og/zen-browser-flake";
-
   };
 
-  outputs = { nixpkgs, nixpkgs-smol, chaotic, home-manager, disko, ... }@inputs:
-    let system = "x86_64-linux";
-    in {
-      nixosConfigurations = {
-        nyx = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            pkgs-smol = import nixpkgs-smol {
-              inherit system;
-              config.allowUnfree = true;
-            };
+  outputs = {
+    nixpkgs,
+    nixpkgs-smol,
+    chaotic,
+    home-manager,
+    disko,
+    ...
+  } @ inputs: let
+    system = "x86_64-linux";
+  in {
+    nixosConfigurations = {
+      nyx = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          pkgs-smol = import nixpkgs-smol {
+            inherit system;
+            config.allowUnfree = true;
           };
-          modules = [
-            ./hosts/nyx/configuration.nix
-            inputs.home-manager.nixosModules.default
-            chaotic.nixosModules.default
-          ];
         };
+        modules = [
+          ./hosts/nyx/configuration.nix
+          inputs.home-manager.nixosModules.default
+          chaotic.nixosModules.default
+        ];
+      };
 
-        # helios = nixpkgs.lib.nixosSystem {
-        #   modules = [
-        #     ./hosts/helios/configuration.nix
-        #     # inputs.home-manager.nixosModules.default
-        #     chaotic.nixosModules.default
-        #   ];
-        # };
+      # helios = nixpkgs.lib.nixosSystem {
+      #   modules = [
+      #     ./hosts/helios/configuration.nix
+      #     # inputs.home-manager.nixosModules.default
+      #     chaotic.nixosModules.default
+      #   ];
+      # };
 
-        theia = nixpkgs.lib.nixosSystem {
-          modules =
-            [ ./hosts/theia/configuration.nix disko.nixosModules.disko ];
+      theia = nixpkgs.lib.nixosSystem {
+        modules = [./hosts/theia/configuration.nix disko.nixosModules.disko];
+      };
+
+      epimetheus = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          pkgs-smol = import nixpkgs-smol {inherit system;};
         };
-
-        epimetheus = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            pkgs-smol = import nixpkgs-smol { inherit system; };
-          };
-          modules =
-            [ ./hosts/epimetheus/configuration.nix disko.nixosModules.disko ];
-        };
+        modules = [./hosts/epimetheus/configuration.nix disko.nixosModules.disko];
       };
     };
+  };
 }

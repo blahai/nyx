@@ -1,7 +1,13 @@
-{ config, modulesPath, lib, pkgs, ... }: {
+{
+  config,
+  modulesPath,
+  lib,
+  pkgs,
+  ...
+}: {
   system.stateVersion = "24.11";
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
+  imports = [(modulesPath + "/profiles/qemu-guest.nix")];
 
   boot = {
     initrd.availableKernelModules = [
@@ -14,9 +20,9 @@
       "sr_mod"
       "virtio_blk"
     ];
-    initrd.kernelModules = [ ];
+    initrd.kernelModules = [];
     kernelPackages = pkgs.linuxPackages_6_12;
-    kernelModules = [ "kvm-amd" ];
+    kernelModules = ["kvm-amd"];
     kernel = {
       sysctl = {
         "vm.max_map_count" = 2147483642;
@@ -28,7 +34,7 @@
         "net.ipv6.conf.all.forwarding" = 1;
       };
     };
-    extraModulePackages = [ ];
+    extraModulePackages = [];
     loader.grub = {
       enable = true;
       device = "/dev/vda";
@@ -38,7 +44,7 @@
   nix = {
     package = pkgs.lix;
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = ["nix-command" "flakes"];
       auto-optimise-store = true;
       sandbox = true;
     };
@@ -58,13 +64,15 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/FED3-A372";
     fsType = "vfat";
-    options = [ "fmask=0022" "dmask=0022" ];
+    options = ["fmask=0022" "dmask=0022"];
   };
 
-  swapDevices = [{
-    device = "/var/lib/swapfile";
-    size = 16 * 1024;
-  }];
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 16 * 1024;
+    }
+  ];
 
   networking = {
     enableIPv6 = false; # Had to disable for now due to problems with resolving
@@ -82,7 +90,7 @@
       ];
     };
     hostName = "theia";
-    nameservers = [ "1.1.1.1" "8.8.8.8" "9.9.9.9" ];
+    nameservers = ["1.1.1.1" "8.8.8.8" "9.9.9.9"];
     domain = "theia.blahai.gay";
     useDHCP = lib.mkDefault false;
     defaultGateway = {
@@ -93,15 +101,19 @@
     interfaces = {
       ens3 = {
         ipv4 = {
-          addresses = [{
-            address = "178.63.118.252";
-            prefixLength = 32;
-          }];
+          addresses = [
+            {
+              address = "178.63.118.252";
+              prefixLength = 32;
+            }
+          ];
 
-          routes = [{
-            address = "178.63.247.183";
-            prefixLength = 32;
-          }];
+          routes = [
+            {
+              address = "178.63.247.183";
+              prefixLength = 32;
+            }
+          ];
         };
       };
     };
@@ -117,7 +129,7 @@
     networkd-dispatcher = {
       enable = true;
       rules."50-tailscale" = {
-        onState = [ "routable" ];
+        onState = ["routable"];
         script = ''
           ${
             lib.getExe pkgs.ethtool
@@ -142,13 +154,12 @@
           "n?vim"
         ];
         prefer =
-          lib.concatStringsSep "|" [ "dotnet" "java.*" "nix" "npm" "node" ];
+          lib.concatStringsSep "|" ["dotnet" "java.*" "nix" "npm" "node"];
       in [
         "-g"
         "--avoid '(^|/)(${avoid})'" # things that we want to avoid killing
         "--prefer '(^|/)(${prefer})'" # things we want to remove fast
       ];
-
     };
 
     caddy = {
@@ -184,7 +195,7 @@
 
     uptime-kuma = {
       enable = true;
-      settings = { PORT = "3001"; };
+      settings = {PORT = "3001";};
     };
 
     forgejo = {
@@ -227,10 +238,9 @@
         use_default_settings = true;
         server = {
           port = 8888;
-          secret_key =
-            "7360d3df7c08ce681cf6d5122e3e182de2c5205e962766abd3e6dfc8dec1b683";
+          secret_key = "7360d3df7c08ce681cf6d5122e3e182de2c5205e962766abd3e6dfc8dec1b683";
         };
-        ui = { infinite_scroll = true; };
+        ui = {infinite_scroll = true;};
 
         general = {
           instance_name = "searchai";
@@ -247,7 +257,7 @@
     openssh = {
       enable = true;
       openFirewall = true;
-      settings = { PasswordAuthentication = false; };
+      settings = {PasswordAuthentication = false;};
     };
 
     fail2ban = {
@@ -261,26 +271,24 @@
     };
   };
 
-  programs = { nix-ld.enable = true; };
+  programs = {nix-ld.enable = true;};
 
   users.users.root = {
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILPbmiNqoyeKXk/VopFm2cFfEnV4cKCFBhbhyYB69Fuu"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILLqPq70t6RbnI8UejEshYcfBP66I4OrLFjvGLLfIEXD"
     ];
-    initialHashedPassword =
-      "$y$j9T$TzqbL4iMGLjli6EEXfRCZ0$AhFJ4iCFxRlstth5owic3M5nq74Sp1qhtctjSBcgAl8";
+    initialHashedPassword = "$y$j9T$TzqbL4iMGLjli6EEXfRCZ0$AhFJ4iCFxRlstth5owic3M5nq74Sp1qhtctjSBcgAl8";
   };
 
   users.users.pingu = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = ["wheel"];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILPbmiNqoyeKXk/VopFm2cFfEnV4cKCFBhbhyYB69Fuu"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILLqPq70t6RbnI8UejEshYcfBP66I4OrLFjvGLLfIEXD"
     ];
-    initialHashedPassword =
-      "$y$j9T$cxwKGmzYyC1eLeIysr8r/.$dsxxxV4NvXY.Wpd9LO.RiuMQuy2lYyy2HGrk52BJX08";
+    initialHashedPassword = "$y$j9T$cxwKGmzYyC1eLeIysr8r/.$dsxxxV4NvXY.Wpd9LO.RiuMQuy2lYyy2HGrk52BJX08";
   };
 
   users.users.minecraft = {
@@ -295,10 +303,8 @@
       openjdk21
       openjdk17
       screen
-
     ];
-    initialHashedPassword =
-      "$y$j9T$KpQYYLB6eWfHAUo9.o/uy1$gnj/UlWLrx5XBZDm2GNdjHs2G5D3XxxqqtrCIf5MX43";
+    initialHashedPassword = "$y$j9T$KpQYYLB6eWfHAUo9.o/uy1$gnj/UlWLrx5XBZDm2GNdjHs2G5D3XxxqqtrCIf5MX43";
   };
 
   environment.systemPackages = with pkgs; [
