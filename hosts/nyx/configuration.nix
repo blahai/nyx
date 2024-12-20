@@ -1,4 +1,11 @@
-{ config, pkgs, pkgs-smol, inputs, lib, ... }: {
+{
+  config,
+  pkgs,
+  pkgs-smol,
+  inputs,
+  lib,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/default.nix
@@ -16,16 +23,16 @@
       };
       efi.canTouchEfiVariables = true;
     };
-    supportedFilesystems = [ "zfs" "ext4" "btrfs" ];
+    supportedFilesystems = ["zfs" "ext4" "btrfs"];
     zfs = {
       forceImportRoot = false;
-      extraPools = [ "zpool" "zootfs" ];
+      extraPools = ["zpool" "zootfs"];
       devNodes = "/dev/disk/by-id";
       package = pkgs.zfs;
       allowHibernation = true; # might cause corruption?
     };
     kernelPackages = pkgs.linuxPackages_6_12;
-    kernel = { sysctl = { "vm.max_map_count" = 2147483642; }; };
+    kernel = {sysctl = {"vm.max_map_count" = 2147483642;};};
     kernelParams = [
       "elevator=none" # for zfs
       "zfs.zfs_arc_max=8589934592"
@@ -41,14 +48,15 @@
 
   networking = {
     hostName = "nyx";
-    hostId = builtins.substring 0 8
+    hostId =
+      builtins.substring 0 8
       (builtins.hashString "md5" config.networking.hostName);
     networkmanager.enable = true;
     stevenblack = {
       enable = true;
-      block = [ "fakenews" "gambling" ];
+      block = ["fakenews" "gambling"];
     };
-    nameservers = [ "1.1.1.1" "1.0.0.1" "9.9.9.9" ];
+    nameservers = ["1.1.1.1" "1.0.0.1" "9.9.9.9"];
   };
 
   time.timeZone = "Europe/Helsinki";
@@ -91,7 +99,7 @@
     pingu = {
       isNormalUser = true;
       description = "Elissa";
-      extraGroups = [ "networkmanager" "wheel" "input" "render" ];
+      extraGroups = ["networkmanager" "wheel" "input" "render"];
       shell = pkgs.fish;
       packages = with pkgs; [
         floorp
@@ -105,24 +113,23 @@
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
     useGlobalPkgs = true;
     useUserPackages = true;
     verbose = true;
     backupFileExtension = "bak";
-    users = { "pingu" = import ./home.nix; };
+    users = {"pingu" = import ./home.nix;};
   };
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
       serviceConfig = {
         Type = "simple";
-        ExecStart =
-          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
         Restart = "on-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;
@@ -141,7 +148,7 @@
       portalPackage = inputs.hyprland.packages."${pkgs.system}".hyprland;
     };
 
-    direnv = { enable = true; };
+    direnv = {enable = true;};
 
     nh = {
       enable = true;
@@ -163,17 +170,17 @@
   nixpkgs.config.allowUnfree = true;
 
   nix = {
-    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
     package = pkgs.lix;
     settings = {
-      experimental-features = [ "nix-command" "flakes" "auto-allocate-uids" ];
+      experimental-features = ["nix-command" "flakes" "auto-allocate-uids"];
       max-jobs = "auto";
       sandbox = true;
       auto-optimise-store = true;
       keep-going = true;
       warn-dirty = false;
       use-xdg-base-directories = true;
-      trusted-users = [ "@wheel" "pingu" "root" ];
+      trusted-users = ["@wheel" "pingu" "root"];
       substituters = [
         "https://nix-community.cachix.org"
         "https://nixpkgs-unfree.cachix.org"
@@ -193,13 +200,12 @@
 
   qt.enable = true;
 
-  environment.sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 =
-    lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" (with pkgs.gst_all_1; [
-      gst-plugins-good
-      gst-plugins-bad
-      gst-plugins-ugly
-      gst-libav
-    ]);
+  environment.sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 = lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" (with pkgs.gst_all_1; [
+    gst-plugins-good
+    gst-plugins-bad
+    gst-plugins-ugly
+    gst-libav
+  ]);
 
   environment.systemPackages = with pkgs; [
     nautilus
