@@ -45,7 +45,10 @@
 
   gtk = {
     enable = true;
-    catppuccin = {
+  };
+
+  catppuccin = {
+    gtk = {
       enable = true;
       flavor = "mocha";
       accent = "pink";
@@ -64,7 +67,10 @@
 
   home.stateVersion = "24.11";
 
-  home.packages = with pkgs; [ obsidian ];
+  home.packages = with pkgs; [ 
+    obsidian
+    inputs.haivim.packages.${pkgs.system}.default
+  ];
 
   home.sessionVariables = { EDITOR = "nvim"; };
 

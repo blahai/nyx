@@ -80,7 +80,7 @@
       shell = pkgs.fish;
       packages = with pkgs; [
         floorp
-	librewolf
+	      librewolf
         vesktop
         equibop
         element-desktop

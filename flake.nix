@@ -26,6 +26,11 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nur.url = "github:nix-community/NUR";
 
+    haivim = {
+      url = "git+ssh://git@github.com/blahai/haivim";
+      inputs = {nixpkgs.follows = "nixpkgs";};
+    };
+
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
