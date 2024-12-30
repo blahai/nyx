@@ -26,12 +26,8 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nur.url = "github:nix-community/NUR";
 
-    # This is a private repository for now while I work on it
-    # My plan is to make it public by the end of the year
-    # for now have a look at https://github.com/redyf/Neve
-    # as that is where I *borrowed* the base from
     haivim = {
-      url = "git+ssh://git@github.com/blahai/haivim";
+      url = "github:blahai/haivim";
       inputs = {nixpkgs.follows = "nixpkgs";};
     };
 
