@@ -184,7 +184,7 @@
       substituters = [
         "https://nix-community.cachix.org"
         "https://nixpkgs-unfree.cachix.org"
-        "https://hyprland.cachix.org/"
+        "https://hyprland.cachix.org"
         "https://anyrun.cachix.org"
         "https://wezterm.cachix.org"
       ];
@@ -211,7 +211,7 @@
     nautilus
     diff-so-fancy
     eog
-    bottles
+    pkgs-smol.bottles
     ffmpeg-full
     gst_all_1.gstreamer
     gst_all_1.gst-libav
@@ -223,13 +223,12 @@
     age
     ssh-to-age
     sops
-    cloudflared
-    inputs.zen-browser.packages."${pkgs.system}".specific
+    inputs.zen-browser.packages."${pkgs.system}".default
     # cava
     socat
     btrfs-progs
-    btop-rocm
-    rocmPackages.rocm-smi
+    # pkgs-smol.btop-rocm
+    # pkgs-smol.rocmPackages.rocm-smi
     hyprcursor
     grimblast
     neovim
@@ -252,6 +251,7 @@
     nixd
     nix-output-monitor
     alejandra
+    comma
     zip
     nodejs
     typescript
@@ -279,6 +279,7 @@
     mission-center
     speedcrunch
     geogebra
+    inputs.ghostty.packages.x86_64-linux.default
   ];
 
   fonts.packages = with pkgs; [

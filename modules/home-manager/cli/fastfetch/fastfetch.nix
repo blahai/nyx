@@ -9,7 +9,7 @@
     enable = true;
     settings = {
       logo = {
-        type = "sixel";
+        type = "kitty";
         source = "~/Pictures/gay.png";
         width = 32;
       };

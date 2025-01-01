@@ -42,7 +42,7 @@
   };
 
   hardware = {
-    amdgpu.opencl.enable = true; # For davinci-resolve
+    # amdgpu.opencl.enable = true; # For davinci-resolve
     opentabletdriver = {
       enable = true; # For osu!
       daemon.enable = true;
@@ -56,7 +56,6 @@
       extraPackages = with pkgs; [
         mesa.drivers
         egl-wayland
-        rocmPackages.clr.icd
         amdvlk
         libva
         libva-utils

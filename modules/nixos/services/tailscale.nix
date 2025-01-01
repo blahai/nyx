@@ -4,6 +4,5 @@
     useRoutingFeatures = "client";
   };
   environment.systemPackages = with pkgs; [
-    trayscale
   ];
 }

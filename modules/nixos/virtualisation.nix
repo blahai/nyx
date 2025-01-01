@@ -53,6 +53,6 @@ in {
     pciutils
     virt-manager
     moonlight-qt # for linux vms
-    looking-glass-client # for windows vms :husk:
+    # looking-glass-client # for windows vms :husk:
   ];
 }

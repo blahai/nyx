@@ -5,7 +5,7 @@
     extra-substituters = [
       "https://nix-community.cachix.org"
       "https://nixpkgs-unfree.cachix.org"
-      "https://hyprland.cachix.org/"
+      "https://hyprland.cachix.org"
       "https://anyrun.cachix.org"
       "https://wezterm.cachix.org"
     ];
@@ -63,11 +63,14 @@
 
     wezterm.url = "github:wez/wezterm?dir=nix";
 
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
+
     catppuccin = {url = "github:catppuccin/nix";};
 
     hyprland.url = "github:hyprwm/Hyprland";
-
-    zen-browser.url = "github:ch4og/zen-browser-flake";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
   outputs = {

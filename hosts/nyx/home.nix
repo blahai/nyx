@@ -75,9 +75,17 @@
   home.packages = with pkgs; [
     obsidian
     inputs.haivim.packages.${pkgs.system}.default
+    mold
+    clang
   ];
 
   home.sessionVariables = {EDITOR = "nvim";};
+
+  home.file.".cargo/config.toml".text = ''
+    [target.x86_64-unknown-linux-gnu]
+    linker = "clang"
+    rustflags = ["-C", "link-arg=-fuse-ld=${pkgs.mold}/bin/mold"]
+  '';
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
