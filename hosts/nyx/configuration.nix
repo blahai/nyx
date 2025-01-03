@@ -224,7 +224,7 @@
     ssh-to-age
     sops
     inputs.zen-browser.packages."${pkgs.system}".default
-    # cava
+    cava
     socat
     btrfs-progs
     # pkgs-smol.btop-rocm
@@ -279,7 +279,6 @@
     mission-center
     speedcrunch
     geogebra
-    inputs.ghostty.packages.x86_64-linux.default
   ];
 
   fonts.packages = with pkgs; [

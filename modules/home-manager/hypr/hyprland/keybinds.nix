@@ -33,7 +33,6 @@
         "Super, R, exec, ${pkgs.anyrun}/bin/anyrun"
         "Super, W, exec, ${pkgs.floorp}/bin/floorp"
         "Super, Q, exec, wezterm"
-        "Super, Return, exec, ghostty"
         "Super, C, killactive"
         "Super, V, togglefloating"
         "Super, E, exec, ${pkgs.nautilus}/bin/nautilus -w"

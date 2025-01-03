@@ -63,10 +63,6 @@
 
     wezterm.url = "github:wez/wezterm?dir=nix";
 
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
-
     catppuccin = {url = "github:catppuccin/nix";};
 
     hyprland.url = "github:hyprwm/Hyprland";
