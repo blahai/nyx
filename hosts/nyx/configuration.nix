@@ -211,7 +211,7 @@
     nautilus
     diff-so-fancy
     eog
-    pkgs-smol.bottles
+    bottles
     ffmpeg-full
     gst_all_1.gstreamer
     gst_all_1.gst-libav
@@ -227,8 +227,8 @@
     cava
     socat
     btrfs-progs
-    # pkgs-smol.btop-rocm
-    # pkgs-smol.rocmPackages.rocm-smi
+    pkgs-smol.btop-rocm
+    pkgs-smol.rocmPackages.rocm-smi
     hyprcursor
     grimblast
     neovim
@@ -279,6 +279,7 @@
     mission-center
     speedcrunch
     geogebra
+    qbittorrent
   ];
 
   fonts.packages = with pkgs; [
