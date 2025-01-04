@@ -37,13 +37,13 @@
   };
 
   fileSystems."/var/lib/virt/images" = {
-    device = "zpool/virt/images";
+    device = "zepool/virt/images";
     fsType = "zfs";
     options = ["zfsutil"];
   };
 
   fileSystems."/var/lib/virt/disks" = {
-    device = "zpool/virt/disks";
+    device = "zepool/virt/disks";
     fsType = "zfs";
     options = ["zfsutil"];
   };
