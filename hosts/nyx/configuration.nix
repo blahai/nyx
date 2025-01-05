@@ -92,7 +92,6 @@
     gnome.gnome-keyring.enable = true;
   };
 
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
   users.users = {
