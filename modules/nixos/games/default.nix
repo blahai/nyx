@@ -56,7 +56,6 @@
       extraPackages = with pkgs; [
         mesa.drivers
         egl-wayland
-        amdvlk
         libva
         libva-utils
       ];
