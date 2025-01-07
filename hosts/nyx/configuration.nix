@@ -90,6 +90,7 @@
     };
 
     gnome.gnome-keyring.enable = true;
+    gvfs.enable = true;
   };
 
   security.rtkit.enable = true;
@@ -138,6 +139,11 @@
 
   programs = {
     firefox.enable = true;
+
+    nautilus-open-any-terminal = {
+      enable = true;
+      terminal = "wezterm";
+    };
 
     fish.enable = true;
 
@@ -199,88 +205,96 @@
 
   qt.enable = true;
 
-  environment.sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 = lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" (with pkgs.gst_all_1; [
-    gst-plugins-good
-    gst-plugins-bad
-    gst-plugins-ugly
-    gst-libav
-  ]);
+  environment = {
+    sessionVariables = {
+      NAUTILUS_4_EXTENSION_DIR = "${pkgs.nautilus-python}/lib/nautilus/extensions-4";
+      GST_PLUGIN_SYSTEM_PATH_1_0 = lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" (with pkgs.gst_all_1; [
+        gst-plugins-good
+        gst-plugins-bad
+        gst-plugins-ugly
+        gst-libav
+      ]);
+    };
+    pathsToLink = [
+      "/share/nautilus-python/extensions"
+    ];
 
-  environment.systemPackages = with pkgs; [
-    nautilus
-    diff-so-fancy
-    eog
-    bottles
-    ffmpeg-full
-    gst_all_1.gstreamer
-    gst_all_1.gst-libav
-    gst_all_1.gst-vaapi
-    gst_all_1.gst-plugins-base
-    gst_all_1.gst-plugins-rs
-    celluloid
-    mpv
-    age
-    ssh-to-age
-    sops
-    inputs.zen-browser.packages."${pkgs.system}".default
-    cava
-    socat
-    btrfs-progs
-    pkgs-smol.btop-rocm
-    pkgs-smol.rocmPackages.rocm-smi
-    hyprcursor
-    grimblast
-    neovim
-    wget
-    git
-    curl
-    fish
-    fastfetch
-    zoxide
-    starship
-    cachix
-    gcc
-    ripgrep
-    clang
-    ninja
-    go
-    lua
-    lua-language-server
-    nil
-    nixd
-    nix-output-monitor
-    alejandra
-    comma
-    zip
-    nodejs
-    typescript
-    busybox
-    rustup
-    vscode-fhs
-    bibata-cursors
-    spotify
-    jq
-    gnome-control-center
-    pavucontrol
-    icon-library
-    bat
-    fzf
-    fd
-    eza
-    glib
-    cliphist
-    playerctl
-    material-icons
-    material-design-icons
-    material-symbols
-    imagemagick
-    wireguard-tools
-    mission-center
-    speedcrunch
-    geogebra
-    qbittorrent
-  ];
-
+    systemPackages = with pkgs; [
+      nautilus
+      nautilus-python
+      diff-so-fancy
+      eog
+      bottles
+      ffmpeg-full
+      gst_all_1.gstreamer
+      gst_all_1.gst-libav
+      gst_all_1.gst-vaapi
+      gst_all_1.gst-plugins-base
+      gst_all_1.gst-plugins-rs
+      celluloid
+      mpv
+      age
+      ssh-to-age
+      sops
+      inputs.zen-browser.packages."${pkgs.system}".default
+      cava
+      socat
+      btrfs-progs
+      pkgs-smol.btop-rocm
+      pkgs-smol.rocmPackages.rocm-smi
+      hyprcursor
+      grimblast
+      neovim
+      wget
+      git
+      curl
+      fish
+      fastfetch
+      zoxide
+      starship
+      cachix
+      gcc
+      ripgrep
+      clang
+      ninja
+      go
+      lua
+      lua-language-server
+      nil
+      nixd
+      nix-output-monitor
+      alejandra
+      comma
+      zip
+      nodejs
+      typescript
+      busybox
+      rustup
+      vscode-fhs
+      bibata-cursors
+      spotify
+      jq
+      gnome-control-center
+      pavucontrol
+      icon-library
+      bat
+      fzf
+      fd
+      eza
+      glib
+      cliphist
+      playerctl
+      material-icons
+      material-design-icons
+      material-symbols
+      imagemagick
+      wireguard-tools
+      mission-center
+      speedcrunch
+      geogebra
+      qbittorrent
+    ];
+  };
   fonts.packages = with pkgs; [
     iosevka-comfy.comfy
     fira-code
