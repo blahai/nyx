@@ -1,0 +1,27 @@
+name: "Update Flake Packages ❄️"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "5 0 * * *"
+jobs:
+  updateFlakePackages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: cachix/install-nix-action@v30
+      - name: Update flake packages
+        run: nix flake update
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if [[ $(git status --porcelain) ]]; then
+            git add flake.lock
+          git commit -m "Chore: update flake.lock"
+            git push
+          else
+            echo "No changes to commit"
+          fi
+

@@ -1,0 +1,3 @@
+flake.lock -diff
+*.css linguist-detectable=false
+*.css linguist-generated=true
