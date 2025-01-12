@@ -9,6 +9,7 @@ in {
     type = types.nullOr (
       types.enum [
         "amd"
+        "vm-amd"
       ]
     );
     default = null;
