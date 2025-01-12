@@ -56,6 +56,12 @@ in {
         graphical
       ];
 
+      # Brothers desktop (will set up later)
+      artemis.modules = [
+        desktop
+        graphical
+      ];
+
       # Other desktop (will set up later)
       aphrodite.modules = [
         desktop

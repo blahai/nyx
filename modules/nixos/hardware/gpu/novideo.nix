@@ -5,13 +5,7 @@
   ...
 }: let
   inherit (config.olympus) device;
-  inherit
-    (lib.modules)
-    mkIf
-    mkMerge
-    mkDefault
-    ;
-  inherit (lib.validators) isWayland;
+  inherit (lib.modules) mkIf mkMerge mkDefault;
 
   isHybrid = device.gpu == "hybrid-nv";
 in {
@@ -21,8 +15,6 @@ in {
 
     services.xserver = mkMerge [
       {videoDrivers = ["nvidia"];}
-
-      # xorg settings
     ];
 
     boot = {
@@ -36,13 +28,10 @@ in {
 
     environment = {
       sessionVariables = mkMerge [
-        {LIBVA_DRIVER_NAME = "nvidia";}
-
-        (mkIf (isWayland config) {
-          # GBM_BACKEND = "nvidia-drm"; # breaks firefox apparently
-
+        {
+          LIBVA_DRIVER_NAME = "nvidia";
           WLR_DRM_DEVICES = mkDefault "/dev/dri/card1";
-        })
+        }
       ];
 
       systemPackages = builtins.attrValues {
