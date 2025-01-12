@@ -4,10 +4,10 @@
   lib,
   ...
 }: let
-  inherit (lib.modules) mkIf mkForce mkMerge mkDefault mkOverride;
+  inherit (lib.modules) mkIf mkForce mkMerge mkDefault;
   inherit (lib.lists) optionals;
-  inherit (lib.options) mkOption mkEnableOption literalExpression;
-  inherit (lib.types) str raw listOf package;
+  inherit (lib.options) mkOption mkEnableOption;
+  inherit (lib.types) raw;
 
   cfg = config.olympus.system.boot;
 in {
