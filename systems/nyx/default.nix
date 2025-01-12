@@ -4,6 +4,10 @@
   ];
 
   olympus = {
+    device = {
+      cpu = "amd";
+      gpu = "amd";
+    };
     system = {
       boot = {
         loader = "systemd-boot";
