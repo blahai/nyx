@@ -29,7 +29,8 @@ Epimethus:
 
 ### Notes
 
-I'm planning on doing an almost full rewrite of this config
+I'm doing an almost full rewrite of this config
+see [rewrite](https://github.com/blahai/nyx/tree/rewrite) branch
 
 ### Flake layout
 
