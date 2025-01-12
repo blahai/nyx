@@ -207,7 +207,11 @@
     clang
   ];
 
-  home.sessionVariables = {EDITOR = "nvim";};
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    NIXOS_OZONE_WL = "1";
+    MOZ_ENABLE_WAYLAND = "1";
+  };
 
   home.file.".cargo/config.toml".text = ''
     [target.x86_64-unknown-linux-gnu]
