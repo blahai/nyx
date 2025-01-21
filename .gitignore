@@ -1,1 +1,4 @@
+# nix things
 result
+# for 'nixos-rebuild build-vm' images
+*.qcow2 
