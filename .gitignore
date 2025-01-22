@@ -1,4 +1,6 @@
 # nix things
 result
 # for 'nixos-rebuild build-vm' images
-*.qcow2 
+*.qcow2
+# direnv
+.direnv/
