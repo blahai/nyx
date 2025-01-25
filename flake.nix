@@ -11,10 +11,19 @@
     wezterm.url = "github:wez/wezterm?dir=nix";
     catppuccin.url = "github:catppuccin/nix";
     hyprland.url = "github:hyprwm/Hyprland";
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hydra = {
+      url = "https://git.lix.systems/lix-project/hydra/archive/main.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     haivim = {
       url = "github:blahai/haivim";
-      inputs = {nixpkgs.follows = "nixpkgs";};
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     ags = {
@@ -46,6 +55,11 @@
       url = "github:nix-systems/default";
     };
 
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -56,7 +70,24 @@
     };
 
     easy-hosts = {
-      url = "github:isabelroses/easy-hosts";
+      url = "github:tgirlcloud/easy-hosts";
+    };
+
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        utils.follows = "flake-utils";
+        flake-compat.follows = "";
+      };
+    };
+
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-compat.follows = "";
+      };
     };
 
     home-manager = {

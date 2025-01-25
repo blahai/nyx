@@ -4,5 +4,8 @@
     ./environment
     ./hardware
     ./networking
+    ./services
+
+    ./remote-modules.nix
   ];
 }

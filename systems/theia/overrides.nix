@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  config,
   modulesPath,
   ...
 }: let
@@ -16,7 +15,7 @@ in {
     };
     systemd.services.qemu-guest-agent.path = [pkgs.shadow];
 
-    system.stateVersion = mkForce "25.04";
+    system.stateVersion = mkForce "25.05";
 
     boot = {
       kernelParams = ["net.ifnames=0"];

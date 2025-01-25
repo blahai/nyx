@@ -17,8 +17,5 @@
         plymouth.enable = false;
       };
     };
-    programs = {
-      fish.enable = true;
-    };
   };
 }
