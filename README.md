@@ -1,5 +1,9 @@
 # My NixOS configuration
 
+This branch may seem dead (and it is) 
+instead look at the [rewrite](https://github.com/blahai/nyx/tree/rewrite) branch
+
+
 Screenshots coming soontm
 
 ### Hosts
