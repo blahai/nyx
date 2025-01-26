@@ -6,7 +6,6 @@ in {
     shell = mkOption {
       type = enum [
         "bash"
-        "zsh"
         "fish"
       ];
       default = "bash";
@@ -28,8 +27,9 @@ in {
         "thunar"
         "dolphin"
         "nemo"
+        "nautilus"
       ];
-      default = "cosmic-files";
+      default = "nautilus";
     };
 
     browser = mkOption {
@@ -75,7 +75,7 @@ in {
       ]);
       default = "hyprlock";
       description = ''
-        The lockscreen module to be loaded by home-manager.
+        The lockscreen module to be loaded by hjem.
       '';
     };
 

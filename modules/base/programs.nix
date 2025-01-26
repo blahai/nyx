@@ -1,18 +1,6 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}: let
-  inherit (lib.meta) getExe;
-
-  bashPrompt = ''
-    eval "$(${getExe pkgs.starship} init bash)"
-  '';
-in {
+{config, ...}: {
   # home-manager is so strange and needs these declared multiple times
   programs = {
-    fish.enable = config.olympus.programs.fish.enable;
-    zsh.enable = config.olympus.programs.zsh.enable;
+    #fish.enable = config.olympus.meta.fish;
   };
 }

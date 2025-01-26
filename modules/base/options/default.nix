@@ -1,6 +1,6 @@
 {
   imports = [
     ./device.nix
-    ./programs
+    ./meta.nix
   ];
 }

@@ -4,6 +4,7 @@
     ./networking.nix
     ./overrides.nix
     ./services.nix
+    ./users.nix
   ];
 
   olympus = {

@@ -1,0 +1,5 @@
+{
+  olympus.system = {
+    mainUser = "pingu";
+  };
+}

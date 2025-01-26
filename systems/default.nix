@@ -1,10 +1,9 @@
 {
   self,
   inputs,
-  lib,
   ...
 }: let
-  # inherit (self) lib;
+  inherit (self) lib;
   inherit (lib.lists) optionals;
 
   profilesPath = ../modules/profiles;

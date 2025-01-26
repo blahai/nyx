@@ -1,6 +1,7 @@
 {
   imports = [
-    ./shells.nix
     ./defaults.nix
+    ./shells.nix
+    ./top-level.nix
   ];
 }

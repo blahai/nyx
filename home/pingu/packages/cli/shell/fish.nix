@@ -1,5 +1,5 @@
 {
-  osConfig,
+  config,
   lib,
   pkgs,
   ...
@@ -9,7 +9,7 @@ in {
   home.packages = with pkgs; [
     neofetch
   ];
-  programs = mkIf osConfig.olympus.programs.fish.enable {
+  programs = mkIf config.olympus.programs.fish.enable {
     fish = {
       enable = true;
 

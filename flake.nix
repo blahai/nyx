@@ -46,11 +46,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     systems = {
       url = "github:nix-systems/default";
     };
@@ -73,6 +68,16 @@
       url = "github:tgirlcloud/easy-hosts";
     };
 
+    hjem = {
+      url = "github:feel-co/hjem";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hjem-rum = {
+      url = "github:the-unnamed-nug/hjem-rum";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.hjem.follows = "hjem";
+    };
+
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs = {
@@ -88,11 +93,6 @@
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "";
       };
-    };
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }

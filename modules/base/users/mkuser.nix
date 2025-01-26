@@ -5,13 +5,12 @@
 }: let
   inherit (lib.modules) mkDefault;
   inherit (lib.attrsets) genAttrs;
-  inherit (builtins) filter hasAttr;
-  ifTheyExist = config: groups: filter (group: hasAttr group config.users.groups) groups;
+  inherit (lib.validators) ifTheyExist;
 in {
   users.users = genAttrs config.olympus.system.users (
     name: {
       home = "/home/" + name;
-      shell = config.olympus.programs.${config.olympus.programs.defaults.shell}.package;
+      # shell = config.olympus.programs.${config.olympus.programs.defaults.shell}.package;
 
       uid = mkDefault 1000;
       isNormalUser = true;
@@ -28,14 +27,17 @@ in {
           "networkmanager"
           "systemd-journal"
           "audio"
-          "pipewire"
+          "pipewire" # this give us access to the rt limits
           "video"
           "input"
           "plugdev"
+          "lp"
           "tss"
           "power"
+          "wireshark"
           "mysql"
           "docker"
+          "podman"
           "git"
           "libvirtd"
           "cloudflared"
