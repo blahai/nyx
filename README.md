@@ -1,6 +1,7 @@
 # My NixOS configuration
 
 Still very much WIP
+
 probably most of this is ~~stolen~~ borrowed from [isabelroses](https://github.com/isabelroses/dotfiles) :3
 
 Screenshots coming soontm (3-5 business days)
