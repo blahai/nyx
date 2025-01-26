@@ -20,6 +20,11 @@
         initrd.enableTweaks = true;
         plymouth.enable = false;
       };
+      networking = {
+        tailscale = {
+          enable = true;
+        };
+      };
     };
   };
 }

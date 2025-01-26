@@ -4,4 +4,5 @@ let
   users = [pingu elissa];
 in {
   "forgejo-runner-token.age".publicKeys = [pingu];
+  "vaultwarden-env.age".publicKeys = [pingu];
 }

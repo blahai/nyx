@@ -1,10 +1,11 @@
 {
   lib,
   pkgs,
+  config,
   modulesPath,
   ...
 }: let
-  inherit (lib.modules) mkForce;
+  inherit (lib.modules) mkForce mkIf;
 in {
   imports = [(modulesPath + "/profiles/qemu-guest.nix")];
 
@@ -12,6 +13,18 @@ in {
     services = {
       smartd.enable = mkForce false; # Unavailable - device lacks SMART capability.
       qemuGuest.enable = true;
+
+      networkd-dispatcher = mkIf config.olympus.system.networking.tailscale.enable {
+        enable = true;
+        rules."50-tailscale" = {
+          onState = ["routable"];
+          script = ''
+            ${
+              lib.getExe pkgs.ethtool
+            } -K ens3 rx-udp-gro-forwarding on rx-gro-list off
+          '';
+        };
+      };
     };
     systemd.services.qemu-guest-agent.path = [pkgs.shadow];
 

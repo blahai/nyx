@@ -121,7 +121,7 @@ in {
 
       caddy.virtualHosts.${cfg.domain} = {
         extraConfig = ''
-          reverse_proxy localhost:3000
+          reverse_proxy localhost:${toString cfg.port}
         '';
       };
     };

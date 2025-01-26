@@ -6,6 +6,7 @@
   inherit (lib.modules) mkDefault mkForce;
 in {
   imports = [
+    ./tailscale.nix
   ];
 
   networking = {
@@ -15,5 +16,13 @@ in {
     useNetworkd = mkForce true;
 
     usePredictableInterfaceNames = mkDefault true;
+
+    nameservers = [
+      "1.1.1.1"
+      "1.0.0.1"
+      "9.9.9.9"
+    ];
+
+    enableIPv6 = true;
   };
 }

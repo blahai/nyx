@@ -24,7 +24,7 @@ in {
 
     services.caddy.virtualHosts.${cfg.domain} = {
       extraConfig = ''
-        reverse_proxy localhost:${cfg.port}
+        reverse_proxy localhost:${toString cfg.port}
       '';
     };
   };
