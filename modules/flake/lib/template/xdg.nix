@@ -6,8 +6,7 @@ let
   XDG_STATE_HOME = "$HOME/.local/state";
   XDG_BIN_HOME = "$HOME/.local/bin";
   XDG_RUNTIME_DIR = "/run/user/$UID";
-in
-{
+in {
   # global env
   glEnv = {
     inherit
@@ -18,7 +17,7 @@ in
       XDG_BIN_HOME
       XDG_RUNTIME_DIR
       ;
-    PATH = [ "$XDG_BIN_HOME" ];
+    PATH = ["$XDG_BIN_HOME"];
   };
 
   sysEnv = {

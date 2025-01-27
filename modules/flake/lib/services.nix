@@ -1,42 +1,40 @@
-{ lib }:
-let
+{lib}: let
   inherit (lib.types) str;
   inherit (lib.options) mkOption mkEnableOption;
   inherit (lib.attrsets) recursiveUpdate;
 
   mkGraphicalService = recursiveUpdate {
-    Unit.PartOf = [ "graphical-session.target" ];
-    Unit.After = [ "graphical-session.target" ];
-    Install.WantedBy = [ "graphical-session.target" ];
+    Unit.PartOf = ["graphical-session.target"];
+    Unit.After = ["graphical-session.target"];
+    Install.WantedBy = ["graphical-session.target"];
   };
 
   mkHyprlandService = recursiveUpdate {
-    Unit.PartOf = [ "graphical-session.target" ];
-    Unit.After = [ "graphical-session.target" ];
-    Install.WantedBy = [ "hyprland-session.target" ];
+    Unit.PartOf = ["graphical-session.target"];
+    Unit.After = ["graphical-session.target"];
+    Install.WantedBy = ["hyprland-session.target"];
   };
 
-  /**
-    A quick way to use my services abstraction
+  /*
+  *
+  A quick way to use my services abstraction
 
-    # Arguments
+  # Arguments
 
-    - [name]: The name of the service
+  - [name]: The name of the service
 
-    # Type
+  # Type
 
-    ```
-    mkServiceOption :: String -> (Int -> String -> String -> AttrSet) -> AttrSet
-    ```
+  ```
+  mkServiceOption :: String -> (Int -> String -> String -> AttrSet) -> AttrSet
+  ```
   */
-  mkServiceOption =
-    name:
-    {
-      port ? 0,
-      host ? "127.0.0.1",
-      domain ? "",
-      extraConfig ? { },
-    }:
+  mkServiceOption = name: {
+    port ? 0,
+    host ? "127.0.0.1",
+    domain ? "",
+    extraConfig ? {},
+  }:
     {
       enable = mkEnableOption "Enable the ${name} service";
 
@@ -59,7 +57,6 @@ let
       };
     }
     // extraConfig;
-in
-{
+in {
   inherit mkGraphicalService mkHyprlandService mkServiceOption;
 }
