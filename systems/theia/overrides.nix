@@ -2,13 +2,10 @@
   lib,
   pkgs,
   config,
-  modulesPath,
   ...
 }: let
   inherit (lib.modules) mkForce mkIf;
 in {
-  imports = [(modulesPath + "/profiles/qemu-guest.nix")];
-
   config = {
     services = {
       smartd.enable = mkForce false; # Unavailable - device lacks SMART capability.
@@ -27,6 +24,9 @@ in {
       };
     };
     systemd.services.qemu-guest-agent.path = [pkgs.shadow];
+
+    # For vsc server cuz slogo is a bitch
+    programs.nix-ld.enable = true;
 
     system.stateVersion = mkForce "25.05";
 
