@@ -5,8 +5,6 @@ in {
     enableIPv6 = true;
     firewall = {
       allowedTCPPorts = [
-        80 # HTTP
-        443 # HTTPS
         25565 # minecraft
         25566 # minecraft
         25567 # minecraft
