@@ -13,6 +13,7 @@ Screenshots coming soontm (3-5 business days)
 | Nyx       | Main desktop  |
 | Theia     | VPS           |
 | Helios    | Laptop        |
+| Ptocheia  | School laptop |
 | Epimethus | Custom ISO    |
 | Artemis   | Old desktop   |
 | Aphrodite | Older desktop |

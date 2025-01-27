@@ -55,6 +55,12 @@ in {
         graphical
       ];
 
+      # Elissa's school laptop (got for free from skool)
+      ptocheia.modules = [
+        laptop
+        graphical
+      ];
+
       # Brothers desktop (will set up later)
       artemis.modules = [
         desktop
