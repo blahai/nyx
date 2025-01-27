@@ -6,6 +6,8 @@
   inherit (lib.modules) mkDefault mkForce;
 in {
   imports = [
+    ./firewall
+
     ./tailscale.nix
   ];
 
