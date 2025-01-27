@@ -1,7 +1,13 @@
-{lib, ...}: let
+{
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib.modules) mkForce mkAfter;
 in {
   boot = {
+    # Use lts kernel for zfs
+    kernelPackages = mkForce pkgs.linuxPackages_6_12;
     kernelParams = mkAfter [
       "noquiet"
       "toram"
