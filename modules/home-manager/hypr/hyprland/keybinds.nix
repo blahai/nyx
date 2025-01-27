@@ -13,7 +13,7 @@
 
     bindm = ["Super, mouse:272, movewindow" "Super, mouse:273, resizewindow"];
 
-    bindn = [" , up, pass, JKPS"];
+    bindn = [" , up, pass, class:^(JKPS)$"];
 
     binde = [
       # Window split ratio

@@ -1,19 +1,14 @@
-{
-  pkgs,
-  config,
-  inputs,
-  lib,
-  ...
-}: {
+{...}: {
   wayland.windowManager.hyprland.settings = {
     workspace = [
-      "special:special, on-created-empty:exec spotify"
+      "special:special, on-created-empty:exec spotify --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime=true"
     ];
 
     windowrule = [
       "noblur,.*"
       "workspace special, spotify"
       "workspace 11 silent, JKPS"
+      "workspace 10 silent, ^(org.qbittorrent.qBittorrent)$"
       "workspace 8 silent, Element"
       "workspace 6 silent, firefox"
       "workspace 5 silent, ^(org.prismlauncher.PrismLauncher)$"

@@ -100,14 +100,12 @@
       isNormalUser = true;
       description = "Elissa";
       extraGroups = ["networkmanager" "wheel" "input" "render"];
-      shell = pkgs.fish;
+      shell = pkgs.bash;
       packages = with pkgs; [
         floorp
         vesktop
         equibop
         element-desktop
-        alacritty
-        kitty
       ];
     };
   };
@@ -185,6 +183,7 @@
       keep-going = true;
       warn-dirty = false;
       use-xdg-base-directories = true;
+      allowed-users = ["@wheel" "pingu" "root"];
       trusted-users = ["@wheel" "pingu" "root"];
       substituters = [
         "https://nix-community.cachix.org"
@@ -220,6 +219,7 @@
     ];
 
     systemPackages = with pkgs; [
+      toybox
       nautilus
       nautilus-python
       diff-so-fancy

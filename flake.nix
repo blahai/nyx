@@ -2,21 +2,6 @@
   description = "Elissa's funny little flake";
 
   nixConfig = {
-    extra-substituters = [
-      "https://nix-community.cachix.org"
-      "https://nixpkgs-unfree.cachix.org"
-      "https://hyprland.cachix.org"
-      "https://anyrun.cachix.org"
-      "https://wezterm.cachix.org"
-    ];
-    extra-trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-      "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
-      "wezterm.cachix.org-1:kAbhjYUC9qvblTE+s7S+kl5XM1zVa4skO+E/1IDWdH0="
-    ];
-
     auto-optimise-store = true;
   };
 
@@ -29,16 +14,6 @@
     haivim = {
       url = "github:blahai/haivim";
       inputs = {nixpkgs.follows = "nixpkgs";};
-    };
-
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs-smol";
     };
 
     ags = {
@@ -98,18 +73,6 @@
           inputs.home-manager.nixosModules.default
           chaotic.nixosModules.default
         ];
-      };
-
-      # helios = nixpkgs.lib.nixosSystem {
-      #   modules = [
-      #     ./hosts/helios/configuration.nix
-      #     # inputs.home-manager.nixosModules.default
-      #     chaotic.nixosModules.default
-      #   ];
-      # };
-
-      theia = nixpkgs.lib.nixosSystem {
-        modules = [./hosts/theia/configuration.nix disko.nixosModules.disko];
       };
 
       epimetheus = nixpkgs.lib.nixosSystem {
