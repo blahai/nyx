@@ -1,3 +1,4 @@
 flake.lock -diff
+*.age -text -diff
 *.css linguist-detectable=false
 *.css linguist-generated=true
