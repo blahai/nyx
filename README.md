@@ -39,6 +39,11 @@ Helios:
 - AMD Radeon 880M
 - 32GB LPDDR5X 7500MT/s
 
+Ptocheia:
+
+- AMD r3 3250u
+- 8GB ram
+
 Epimethus:
 
 - N/A
