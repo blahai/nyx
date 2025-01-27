@@ -14,7 +14,7 @@ in {
     # to decrypt the secrets
     identityPaths = [
       "/etc/ssh/ssh_host_ed25519_key"
-      "${sshDir}/id_ed25519"
+      #"${sshDir}/id_ed25519"
     ];
   };
 }
