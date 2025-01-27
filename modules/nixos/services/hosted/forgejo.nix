@@ -111,7 +111,6 @@ in {
           enable = true;
           name = "Theia";
           url = cfg.domain;
-          # token = "KQA3LtLj5s5PGUfVAxVJ2OCcnySDWdgjlsSaGbOJ";
           tokenFile = config.age.secrets.forgejo-runner-token.path;
           labels = [
             "ubuntu-latest:docker://node:22-bookworm"

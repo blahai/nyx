@@ -3,7 +3,6 @@
   config,
   ...
 }: let
-  inherit (lib) template;
   inherit (lib.modules) mkIf;
   inherit (lib.services) mkServiceOption;
   inherit (lib.secrets) mkSecret;
