@@ -8,6 +8,7 @@ in {
   imports = [
     ./firewall
 
+    ./ssh.nix
     ./tailscale.nix
   ];
 
