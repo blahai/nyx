@@ -9,15 +9,9 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nur.url = "github:nix-community/NUR";
     wezterm.url = "github:wez/wezterm?dir=nix";
-    catppuccin.url = "github:catppuccin/nix";
     hyprland.url = "github:hyprwm/Hyprland";
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    hydra = {
-      url = "https://git.lix.systems/lix-project/hydra/archive/main.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -83,14 +77,6 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         utils.follows = "flake-utils";
-        flake-compat.follows = "";
-      };
-    };
-
-    git-hooks = {
-      url = "github:cachix/git-hooks.nix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "";
       };
     };
