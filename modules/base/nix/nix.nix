@@ -121,9 +121,8 @@ in {
       # build from source if the build fails from a binary source
       # fallback = true;
 
-      # this defaults to true, however it slows down evaluation so maybe we should disable it
-      # some day, but we do need it for catppuccin/nix so maybe not too soon
-      allow-import-from-derivation = true;
+      # defaults to true but slows down eval times so disable it as it is not needed
+      allow-import-from-derivation = false;
 
       # for direnv GC roots
       keep-derivations = true;
