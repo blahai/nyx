@@ -18,7 +18,7 @@
 in {
   imports = [inputs.easy-hosts.flakeModule];
 
-  config.easyHosts = {
+  config.easy-hosts = {
     shared.specialArgs = {inherit lib;};
 
     perClass = class: {
@@ -27,7 +27,7 @@ in {
         "${self}/modules/${class}/default.nix"
 
         (optionals (class != "iso") [
-          # import the home module, which is users for configuring users via home-manager
+          # import the home module, which is users for configuring users via hjem
           "${self}/home/default.nix"
 
           # import the base module, this contains the common configurations between all systems

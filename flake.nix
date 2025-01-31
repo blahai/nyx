@@ -6,8 +6,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs-smol.url = "github:nixos/nixpkgs?ref=nixos-unstable-small";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    nur.url = "github:nix-community/NUR";
     wezterm.url = "github:wez/wezterm?dir=nix";
     hyprland.url = "github:hyprwm/Hyprland";
     lix-module = {
@@ -66,6 +64,7 @@
       url = "github:feel-co/hjem";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     hjem-rum = {
       url = "github:the-unnamed-nug/hjem-rum";
       inputs.nixpkgs.follows = "nixpkgs";

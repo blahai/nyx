@@ -1,6 +1,5 @@
 {
   imports = [
-    #./packages
-    #./system
+    ./alacritty.nix # this is a test for hjem-rum
   ];
 }
