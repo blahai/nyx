@@ -13,6 +13,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    haipkgs = {
+      url = "git+https://git.blahai.gay/blahai/haipkgs.git";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     haivim = {
       url = "github:blahai/haivim";
       inputs.nixpkgs.follows = "nixpkgs";

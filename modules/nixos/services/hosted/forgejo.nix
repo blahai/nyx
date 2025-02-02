@@ -78,7 +78,7 @@ in {
 
             SSH_PORT = 22;
             SSH_LISTEN_PORT = 22;
-            BUILTIN_SSH_SERVER_USER = "git";
+            BUILTIN_SSH_SERVER_USER = "forgejo";
           };
 
           ui = {
