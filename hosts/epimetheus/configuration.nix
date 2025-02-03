@@ -24,7 +24,6 @@
   environment.systemPackages = with pkgs; [
     # The essentials
     neovim
-    disko
     parted
     git
     nixd

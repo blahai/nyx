@@ -9,7 +9,13 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs-smol.url = "github:nixos/nixpkgs?ref=nixos-unstable-small";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    nur.url = "github:nix-community/NUR";
+
+    haipkgs = {
+      url = "git+https://git.blahai.gay/blahai/haipkgs.git";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
 
     haivim = {
       url = "github:blahai/haivim";
@@ -23,16 +29,6 @@
 
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    disko = {
-      url = "github:nix-community/disko/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -70,7 +66,7 @@
         };
         modules = [
           ./hosts/nyx/configuration.nix
-          inputs.home-manager.nixosModules.default
+          home-manager.nixosModules.default
           chaotic.nixosModules.default
         ];
       };

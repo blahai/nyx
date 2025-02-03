@@ -1,12 +1,10 @@
 {
-  inputs,
   pkgs,
-  lib,
   config,
   ...
 }: {
   home.packages = with pkgs; [
-    inputs.wezterm.packages.${pkgs.system}.default
+    wezterm-git
   ];
 
   xdg.configFile."wezterm" = {

@@ -9,7 +9,7 @@
       "${pkgs.swww}/bin/swww-daemon --format xrgb"
       "${pkgs.floorp}/bin/floorp"
       "${pkgs.qbittorrent}/bin/qbittorrent"
-      "${pkgs.vesktop}/bin/vesktop --ozone-platform-hint=auto --enable-blink-features=MiddleClickAutoscroll --enable-wayland-ime=true"
+      "vesktop"
       "wl-paste --type text --watch cliphist store"
       "wl-paste --type image --watch cliphist store"
       "JKPS"

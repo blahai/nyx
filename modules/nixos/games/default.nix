@@ -5,7 +5,6 @@
   ...
 }: {
   nixpkgs = {
-    overlays = [inputs.nur.overlays.default];
     config = {allowUnfree = true;};
   };
 
@@ -14,7 +13,7 @@
     prismlauncher
     osu-lazer-bin
     # davinci-resolve
-    nur.repos.reedrw.jkps
+    inputs.haipkgs.packages.${pkgs.system}.jkps
   ];
 
   programs = {

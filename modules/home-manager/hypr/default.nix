@@ -30,7 +30,6 @@
     configPackages = [config.wayland.windowManager.hyprland.package];
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
-      inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
     ];
   };
 
