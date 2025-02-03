@@ -1,6 +1,7 @@
 {
   imports = [
-    ./system.nix
     ./nix.nix
+    ./substituters.nix
+    ./system.nix
   ];
 }

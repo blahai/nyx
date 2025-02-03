@@ -110,10 +110,12 @@ in {
         instances.default = {
           enable = true;
           name = "Theia";
-          url = cfg.domain;
+          url = "https://${cfg.domain}";
           tokenFile = config.age.secrets.forgejo-runner-token.path;
           labels = [
             "ubuntu-latest:docker://node:22-bookworm"
+            "nixos-latest:docker://nixos/nix"
+            "lix-latest:docker://git.blahai.gay/blahai/lix"
           ];
         };
       };
