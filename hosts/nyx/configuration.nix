@@ -178,7 +178,6 @@
   };
   nix = {
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];
-    package = pkgs.lix;
     settings = {
       experimental-features = ["nix-command" "flakes" "auto-allocate-uids"];
       max-jobs = "auto";

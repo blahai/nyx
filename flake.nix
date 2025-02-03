@@ -10,6 +10,11 @@
     nixpkgs-smol.url = "github:nixos/nixpkgs?ref=nixos-unstable-small";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     haipkgs = {
       url = "git+https://git.blahai.gay/blahai/haipkgs.git";
       inputs = {
@@ -48,9 +53,9 @@
   outputs = {
     nixpkgs,
     nixpkgs-smol,
+    lix-module,
     chaotic,
     home-manager,
-    disko,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -66,6 +71,7 @@
         };
         modules = [
           ./hosts/nyx/configuration.nix
+          lix-module.nixosModules.default
           home-manager.nixosModules.default
           chaotic.nixosModules.default
         ];
@@ -76,7 +82,7 @@
           inherit inputs;
           pkgs-smol = import nixpkgs-smol {inherit system;};
         };
-        modules = [./hosts/epimetheus/configuration.nix disko.nixosModules.disko];
+        modules = [./hosts/epimetheus/configuration.nix];
       };
     };
   };
