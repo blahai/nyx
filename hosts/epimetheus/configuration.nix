@@ -71,11 +71,19 @@
   };
 
   nix = {
-    package = pkgs.lix;
     nixPath = ["nixpkgs=${config.nix.registry.nixpkgs.to.path}"];
     channel.enable = false;
     settings = {
-      experimental-features = ["nix-command" "flakes" "auto-allocate-uids"];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+        "auto-allocate-uids"
+        "pipe-operator"
+        "recursive-nix"
+        "ca-derivations"
+        "dynamic-derivations"
+        "fetch-closure"
+      ];
       max-jobs = "auto";
       sandbox = true;
       auto-optimise-store = true;

@@ -25,14 +25,24 @@
       group = "jellyfin";
     };
 
+    radarr = {
+      enable = true;
+      openFirewall = true;
+      dataDir = "/mnt/zootfs/Media/radarr";
+      package = pkgs.radarr;
+      user = "jellyfin";
+      group = "jellyfin";
+    };
+
     prowlarr = {
       enable = true;
       openFirewall = true;
       package = pkgs.prowlarr;
     };
   };
+
   # This bullshittery is cuz sonarr v4 still uses
-  # dotnet 6 which is LTS and is marked broken in
+  # dotnet 6 which is EOL and is marked broken in
   # nixpkgs but they are moving to 8 in v5 which
   # will happen eventually (not anytime soon?)
   nixpkgs.config.permittedInsecurePackages = [
