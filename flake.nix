@@ -42,8 +42,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    wezterm.url = "github:wez/wezterm?dir=nix";
-
     catppuccin = {url = "github:catppuccin/nix";};
 
     hyprland.url = "github:hyprwm/Hyprland";
