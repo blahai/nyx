@@ -356,11 +356,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1739465816,
-        "narHash": "sha256-XqRCZXnbfZA90Y+R46w9Tc46ZGbQ/EN2/pzxByqS5uM=",
+        "lastModified": 1739470114,
+        "narHash": "sha256-b81KYVs8xcKkvPcp6NnU+qTAJfHpdOYB8DtTWXoh0bg=",
         "ref": "refs/heads/main",
-        "rev": "85986cb3d2a0abd234a38781305e43412f30dbed",
-        "revCount": 58,
+        "rev": "d06a4b4bed4335098a757c46ad8f0310d893e980",
+        "revCount": 59,
         "type": "git",
         "url": "https://git.blahai.gay/blahai/haipkgs.git"
       },

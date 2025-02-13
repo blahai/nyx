@@ -2,6 +2,7 @@
   inputs,
   config,
   pkgs,
+  pkgs-smol,
   ...
 }: {
   imports = [
@@ -56,7 +57,7 @@
     };
     iconTheme = {
       name = "WhiteSur";
-      package = pkgs.whitesur-icon-theme.override {
+      package = pkgs-smol.whitesur-icon-theme.override {
         boldPanelIcons = true;
         alternativeIcons = true;
       };

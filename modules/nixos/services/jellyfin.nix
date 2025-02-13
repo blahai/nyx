@@ -13,7 +13,13 @@
       enable = true;
       port = 5055;
       openFirewall = true;
-      package = pkgs.jellyseerr;
+      package = pkgs.jellyseerr.overrideAttrs (_: {
+        # https://github.com/NixOS/nixpkgs/pull/380532
+        postBuild = ''
+          # Clean up broken symlinks left behind by `pnpm prune`
+          find node_modules -xtype l -delete
+        '';
+      });
     };
 
     sonarr = {
@@ -40,15 +46,4 @@
       package = pkgs.prowlarr;
     };
   };
-
-  # This bullshittery is cuz sonarr v4 still uses
-  # dotnet 6 which is EOL and is marked broken in
-  # nixpkgs but they are moving to 8 in v5 which
-  # will happen eventually (not anytime soon?)
-  nixpkgs.config.permittedInsecurePackages = [
-    "aspnetcore-runtime-6.0.36"
-    "aspnetcore-runtime-wrapped-6.0.36"
-    "dotnet-sdk-6.0.428"
-    "dotnet-sdk-wrapped-6.0.428"
-  ];
 }

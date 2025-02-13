@@ -111,7 +111,7 @@
   };
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = {inherit inputs pkgs-smol;};
     useGlobalPkgs = true;
     useUserPackages = true;
     verbose = true;

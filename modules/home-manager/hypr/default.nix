@@ -2,7 +2,6 @@
   pkgs,
   config,
   inputs,
-  lib,
   ...
 }: {
   imports = [
@@ -27,10 +26,11 @@
   ];
 
   xdg.configFile."hypr/xdph.conf" = {
-    target = "";
     text = ''
       screencopy {
-        custom_picker_binary = ${pkgs.hyprland-preview-share-picker-git}/bin/result-hyprland-preview-share-picker
+        max_fps = 144
+        custom_picker_binary = ${pkgs.hyprland-preview-share-picker-git}/bin/hyprland-preview-share-picker
+        allow_token_by_default = true
       }
     '';
   };
