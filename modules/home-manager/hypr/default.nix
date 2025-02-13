@@ -23,7 +23,17 @@
     grim
     slurp
     libnotify
+    result-hyprland-preview-share-picker-git
   ];
+
+  xdg.configFile."hypr/xdph.conf" = {
+    target = "";
+    text = ''
+      screencopy {
+        custom_picker_binary = ${pkgs.result-hyprland-preview-share-picker-git}/bin/result-hyprland-preview-share-picker
+      }
+    '';
+  };
 
   xdg.portal = {
     enable = true;
