@@ -33,6 +33,9 @@
       };
       gpg = {format = "ssh";};
       init = {defaultBranch = "main";};
+      format = {
+        signOff = true;
+      };
     };
   };
 
