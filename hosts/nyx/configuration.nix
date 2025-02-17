@@ -99,7 +99,13 @@
     pingu = {
       isNormalUser = true;
       description = "Elissa";
-      extraGroups = ["networkmanager" "wheel" "input" "render"];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "input"
+        "render"
+        "jellyfin"
+      ];
       shell = pkgs.bash;
       packages = with pkgs; [
         floorp
@@ -183,7 +189,6 @@
         "nix-command"
         "flakes"
         "auto-allocate-uids"
-        "pipe-operator"
         "recursive-nix"
         "ca-derivations"
         "dynamic-derivations"
@@ -193,7 +198,9 @@
       sandbox = true;
       auto-optimise-store = true;
       keep-going = true;
+      fallback = true;
       warn-dirty = false;
+      allow-import-from-derivation = true;
       use-xdg-base-directories = true;
       allowed-users = ["@wheel" "pingu" "root"];
       trusted-users = ["@wheel" "pingu" "root"];
@@ -202,16 +209,12 @@
         "https://nixpkgs-unfree.cachix.org"
         "https://haipkgs.cachix.org"
         "https://hyprland.cachix.org"
-        "https://anyrun.cachix.org"
-        "https://wezterm.cachix.org"
       ];
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
         "haipkgs.cachix.org-1:AcjMqIafTEQ7dw99RpeTJU2ywNUn1h8yIxz2+zjpK/A="
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-        "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
-        "wezterm.cachix.org-1:kAbhjYUC9qvblTE+s7S+kl5XM1zVa4skO+E/1IDWdH0="
       ];
     };
   };
@@ -233,7 +236,6 @@
     ];
 
     systemPackages = with pkgs; [
-      toybox
       nautilus
       nautilus-python
       diff-so-fancy
@@ -273,17 +275,13 @@
       go
       lua
       lua-language-server
-      nil
-      nixd
       nix-output-monitor
       alejandra
       comma
       zip
       nodejs
-      typescript
       busybox
       rustup
-      vscode-fhs
       bibata-cursors
       spotify
       jq

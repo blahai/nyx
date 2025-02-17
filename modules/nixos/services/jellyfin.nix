@@ -40,6 +40,14 @@
       group = "jellyfin";
     };
 
+    bazarr = {
+      enable = true;
+      openFirewall = true;
+      package = pkgs.bazarr;
+      user = "jellyfin";
+      group = "jellyfin";
+    };
+
     prowlarr = {
       enable = true;
       openFirewall = true;

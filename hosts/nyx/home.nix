@@ -22,6 +22,7 @@
     signing = {
       signByDefault = true;
       key = "/home/pingu/.ssh/id_ed25519";
+      format = "ssh";
     };
     extraConfig = {
       core = {
@@ -31,7 +32,6 @@
       url = {
         "ssh://git@github.com/" = {insteadOf = "https://github.com/";};
       };
-      gpg = {format = "ssh";};
       init = {defaultBranch = "main";};
       format = {
         signOff = true;

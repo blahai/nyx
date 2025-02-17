@@ -1,4 +1,4 @@
-{...}: {
+_: {
   wayland.windowManager.hyprland.settings = {
     workspace = [
       "special:special, on-created-empty:exec spotify --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime=true"
