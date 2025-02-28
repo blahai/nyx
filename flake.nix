@@ -54,6 +54,7 @@
     lix-module,
     chaotic,
     home-manager,
+    haipkgs,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -72,6 +73,7 @@
           lix-module.nixosModules.default
           home-manager.nixosModules.default
           chaotic.nixosModules.default
+          haipkgs.nixosModules.default
         ];
       };
 

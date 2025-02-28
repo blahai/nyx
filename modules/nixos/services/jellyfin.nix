@@ -13,13 +13,7 @@
       enable = true;
       port = 5055;
       openFirewall = true;
-      package = pkgs.jellyseerr.overrideAttrs (_: {
-        # https://github.com/NixOS/nixpkgs/pull/380532
-        postBuild = ''
-          # Clean up broken symlinks left behind by `pnpm prune`
-          find node_modules -xtype l -delete
-        '';
-      });
+      package = pkgs.jellyseerr;
     };
 
     sonarr = {
