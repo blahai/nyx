@@ -16,7 +16,7 @@
     };
 
     haipkgs = {
-      url = "git+https://git.blahai.gay/blahai/haipkgs.git";
+      url = "git+https://gitlab.blahai.gay/elissa/haipkgs.git";
       inputs = {
         nixpkgs.follows = "nixpkgs";
       };

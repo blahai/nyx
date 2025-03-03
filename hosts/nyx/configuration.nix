@@ -154,7 +154,7 @@
     hyprland = {
       enable = true;
       package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-      portalPackage = inputs.hyprland.packages."${pkgs.system}".hyprland;
+      portalPackage = inputs.hyprland.packages."${pkgs.system}".xdg-desktop-portal-hyprland;
     };
 
     direnv = {enable = true;};
@@ -255,8 +255,8 @@
       cava
       socat
       btrfs-progs
-      pkgs-smol.btop-rocm
-      pkgs-smol.rocmPackages.rocm-smi
+      btop-rocm
+      rocmPackages.rocm-smi
       hyprcursor
       grimblast
       neovim

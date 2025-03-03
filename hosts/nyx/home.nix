@@ -60,7 +60,7 @@
     };
     iconTheme = {
       name = "WhiteSur";
-      package = pkgs-smol.whitesur-icon-theme.override {
+      package = pkgs.whitesur-icon-theme.override {
         boldPanelIcons = true;
         alternativeIcons = true;
       };
