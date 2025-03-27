@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  enableIOMMU = true;
+  enableIOMMU = false;
 in {
   boot = lib.mkIf enableIOMMU {
     initrd.kernelModules = lib.mkBefore [

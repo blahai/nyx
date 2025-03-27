@@ -50,18 +50,22 @@ if utils.is_linux() then
 else
   c.window_decorations = "RESIZE"
 end
-c.window_padding = { left = 10, right = 0, top = 0, bottom = 0 }
+c.window_padding = { left = 10, right = 10, top = 0, bottom = 0 }
 c.adjust_window_size_when_changing_font_size = false
 
 -- fonts
 c.font = wezterm.font_with_fallback({
-  "Maple Mono",
-  "Symbols Nerd Font",
+  {
+    family = "Maple Mono NF",
+    weight = 500,
+    harfbuzz_features = { "cv03", "calt", "ss08" },
+  },
+  { family = "Symbols Nerd Font", weight = "Bold" },
 })
 c.font_size = 13
 c.adjust_window_size_when_changing_font_size = false
 c.window_frame = {
-  font = wezterm.font("Maple Mono"),
+  font = wezterm.font("Maple Mono NF"),
   font_size = c.font_size,
 }
 

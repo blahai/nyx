@@ -36,6 +36,12 @@
     options = ["zfsutil"];
   };
 
+  fileSystems."/var/lib/immich" = {
+    device = "zepool/immich";
+    fsType = "zfs";
+    options = ["zfsutil"];
+  };
+
   fileSystems."/var/lib/virt/images" = {
     device = "zepool/virt/images";
     fsType = "zfs";
@@ -71,12 +77,6 @@
     device = "/dev/disk/by-label/BOOT";
     fsType = "vfat";
     options = ["fmask=0022" "dmask=0022"];
-  };
-
-  fileSystems."/mnt/ssd" = {
-    device = "/dev/disk/by-uuid/e4c31e1c-6667-4582-8d6a-d142d6118ce2";
-    fsType = "btrfs";
-    options = ["async" "auto" "noatime" "rw"];
   };
 
   fileSystems."/mnt/ext" = {

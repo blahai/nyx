@@ -5,27 +5,19 @@ _: {
     ];
 
     windowrule = [
-      "noblur,.*"
-      "workspace special, spotify"
-      "workspace 11 silent, JKPS"
-      "workspace 10 silent, ^(org.qbittorrent.qBittorrent)$"
-      "workspace 8 silent, Element"
-      "workspace 6 silent, firefox"
-      "workspace 5 silent, ^(org.prismlauncher.PrismLauncher)$"
-      "workspace 3 silent, vesktop"
-      "workspace 2 silent, ^(steam)$"
-      "workspace 1 silent, floorp"
-      "float, ^(blueberry.py)$"
-      "float, ^(com.github.Aylur.ags)$"
-      "float, ^(JKPS)(.*)"
-    ];
-
-    windowrulev2 = [
+      "workspace special, class:spotify"
+      # "workspace 11 silent, class:JKPS"
+      "workspace 10 silent, class:(org.qbittorrent.qBittorrent)"
+      "workspace 6 silent, class:firefox"
+      "workspace 5 silent, class:(org.prismlauncher.PrismLauncher)"
+      "workspace 3 silent, class:vesktop"
+      "workspace 2 silent, class:steam"
+      "workspace 1 silent, class:floorp"
+      "noblur, class:(org.wezfurlong.wezterm)"
     ];
 
     layerrule = [
       "xray 0, .*"
-      "noanim, walker"
       "noanim, selection"
       "noanim, overview"
       "noanim, anyrun"
@@ -35,8 +27,6 @@ _: {
       "blur, shell:*"
       "ignorealpha 0.6, shell:*"
 
-      "blur, eww"
-      "ignorealpha 0.8, eww"
       "noanim, noanim"
       "blur, noanim"
       "blur, gtk-layer-shell"
@@ -46,8 +36,6 @@ _: {
       "blur, notifications"
       "ignorealpha 0.69, notifications"
 
-      "animation slide top, sideleft.*"
-      "animation slide top, sideright.*"
       "blur, session"
 
       "blur, bar"

@@ -12,8 +12,9 @@
     protonup-qt
     prismlauncher
     osu-lazer-bin
+    mangohud
     # davinci-resolve
-    inputs.haipkgs.packages.${pkgs.system}.jkps
+    # jkps
   ];
 
   programs = {
@@ -53,7 +54,7 @@
       enable = true;
       enable32Bit = true;
       extraPackages = with pkgs; [
-        mesa.drivers
+        mesa
         egl-wayland
         libva
         libva-utils

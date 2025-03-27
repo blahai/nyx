@@ -1,9 +1,10 @@
 {
   pkgs,
-  config,
-  inputs,
+  lib,
   ...
-}: {
+}: let
+  inherit (lib.modules) mkDefault;
+in {
   imports = [
     ./hyprland/rules.nix
     ./hyprland/keybinds.nix
@@ -36,8 +37,7 @@
   };
 
   xdg.portal = {
-    enable = true;
-    configPackages = [config.wayland.windowManager.hyprland.package];
+    enable = mkDefault true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
     ];
@@ -46,7 +46,9 @@
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+    package = null;
+    portalPackage = null;
+    systemd.variables = ["--all"];
 
     settings = {
       monitor = [

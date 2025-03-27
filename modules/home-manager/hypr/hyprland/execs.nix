@@ -12,7 +12,7 @@
       "vesktop"
       "wl-paste --type text --watch cliphist store"
       "wl-paste --type image --watch cliphist store"
-      "JKPS"
+      # "JKPS"
       "ags"
     ];
   };

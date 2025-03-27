@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  pkgs-smol,
   inputs,
   lib,
   ...
@@ -26,7 +25,7 @@
     supportedFilesystems = ["zfs" "ext4" "btrfs"];
     zfs = {
       forceImportRoot = false;
-      extraPools = ["zpool" "zootfs"];
+      extraPools = ["zpool" "zootfs" "zepool"];
       devNodes = "/dev/disk/by-id";
       package = pkgs.zfs;
       allowHibernation = true; # might cause corruption?
@@ -73,20 +72,32 @@
     LC_TIME = "fi_FI.UTF-8";
   };
 
+  environment.etc."greetd/hyprland.conf".text = ''
+    exec-once = ${pkgs.greetd.regreet}/bin/regreet; hyprctl dispatch exit
+
+    animations {
+      enabled = false
+    }
+
+    misc {
+        disable_hyprland_logo = true
+        disable_splash_rendering = true
+        disable_hyprland_qtutils_check = true
+    }
+  '';
+
   services = {
-    displayManager.defaultSession = "hyprland";
-    xserver = {
-      enable = true;
-      displayManager = {
-        gdm = {
-          enable = true;
-          autoSuspend = false;
+    greetd = {
+      settings = {
+        default_session = {
+          command = "${config.programs.hyprland.package}/bin/Hyprland --config /etc/greetd/hyprland.conf";
         };
       };
-      xkb = {
-        layout = "us";
-        variant = "euro";
-      };
+    };
+
+    xserver = {
+      enable = false;
+      excludePackages = [pkgs.xterm];
     };
 
     gnome.gnome-keyring.enable = true;
@@ -110,14 +121,12 @@
       packages = with pkgs; [
         floorp
         vesktop-git
-        equibop
-        element-desktop
       ];
     };
   };
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs pkgs-smol;};
+    extraSpecialArgs = {inherit inputs;};
     useGlobalPkgs = true;
     useUserPackages = true;
     verbose = true;
@@ -151,6 +160,19 @@
 
     fish.enable = true;
 
+    regreet = {
+      enable = true;
+      settings = {
+        background = {
+          path = ../../files/nix-Wallpaper.png;
+          fit = "Cover";
+        };
+        GTK = {
+          application_prefer_dark_theme = true;
+        };
+      };
+    };
+
     hyprland = {
       enable = true;
       package = inputs.hyprland.packages."${pkgs.system}".hyprland;
@@ -178,10 +200,8 @@
 
   nixpkgs = {
     config.allowUnfree = true;
-    overlays = [
-      inputs.haipkgs.overlays.default
-    ];
   };
+
   nix = {
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];
     settings = {
@@ -241,7 +261,7 @@
       diff-so-fancy
       eog
       bottles
-      ffmpeg-full
+      ffmpeg
       gst_all_1.gstreamer
       gst_all_1.gst-libav
       gst_all_1.gst-vaapi
@@ -295,9 +315,6 @@
       glib
       cliphist
       playerctl
-      material-icons
-      material-design-icons
-      material-symbols
       imagemagick
       wireguard-tools
       mission-center
@@ -316,8 +333,9 @@
     google-fonts
     material-symbols
     material-icons
-    maple-mono
-    maple-mono-NF
+    material-design-icons
+    maple-mono.variable
+    maple-mono.NF
   ];
 
   programs.gnupg.agent = {
@@ -325,9 +343,9 @@
     enableSSHSupport = true;
   };
 
-  programs.localsend = {
+  services.fwupd.enable = true;
+  services.smartd = {
     enable = true;
-    openFirewall = true;
   };
 
   services.openssh = {

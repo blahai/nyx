@@ -2,7 +2,6 @@
   inputs,
   config,
   pkgs,
-  pkgs-smol,
   ...
 }: {
   imports = [
@@ -43,7 +42,7 @@
     enable = true;
     extraConfig = ''
       Host theia
-        HostName 178.63.118.252
+        HostName 5.231.45.234
         User pingu
 
       Host artemis

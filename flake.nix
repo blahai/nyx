@@ -6,13 +6,22 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    nixpkgs-smol.url = "github:nixos/nixpkgs?ref=nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable-small";
+    #nixpkgs.url = "github:nixos/nixpkgs";
+    #nixpkgs.url = "path:/home/pingu/Documents/GitHub/NixOS/nixpkgs";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
+    # to keep lix up to date
+    lix = {
+      url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
+      inputs = {nixpkgs.follows = "nixpkgs";};
+    };
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        lix.follows = "lix";
+      };
     };
 
     haipkgs = {
@@ -42,7 +51,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    catppuccin = {url = "github:catppuccin/nix";};
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     hyprland.url = "github:hyprwm/Hyprland";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
@@ -50,23 +62,16 @@
 
   outputs = {
     nixpkgs,
-    nixpkgs-smol,
     lix-module,
     chaotic,
     home-manager,
     haipkgs,
     ...
-  } @ inputs: let
-    system = "x86_64-linux";
-  in {
+  } @ inputs: {
     nixosConfigurations = {
       nyx = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
-          pkgs-smol = import nixpkgs-smol {
-            inherit system;
-            config.allowUnfree = true;
-          };
         };
         modules = [
           ./hosts/nyx/configuration.nix
@@ -80,7 +85,6 @@
       epimetheus = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
-          pkgs-smol = import nixpkgs-smol {inherit system;};
         };
         modules = [
           ./hosts/epimetheus/configuration.nix

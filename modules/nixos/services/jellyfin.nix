@@ -42,6 +42,13 @@
       group = "jellyfin";
     };
 
+    flaresolverr = {
+      enable = true;
+      openFirewall = true;
+      port = 8191;
+      package = pkgs.flaresolverr-21hsmw;
+    };
+
     prowlarr = {
       enable = true;
       openFirewall = true;
