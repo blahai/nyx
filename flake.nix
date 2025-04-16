@@ -6,7 +6,8 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     #nixpkgs.url = "github:nixos/nixpkgs";
     #nixpkgs.url = "path:/home/pingu/Documents/GitHub/NixOS/nixpkgs";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
@@ -16,6 +17,7 @@
       url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
       inputs = {nixpkgs.follows = "nixpkgs";};
     };
+
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
       inputs = {
@@ -25,7 +27,7 @@
     };
 
     haipkgs = {
-      url = "git+https://gitlab.blahai.gay/elissa/haipkgs.git";
+      url = "git+https://git.blahai.gay/elissa/haipkgs.git";
       inputs = {
         nixpkgs.follows = "nixpkgs";
       };
@@ -38,6 +40,11 @@
 
     ags = {
       url = "github:Aylur/ags/v1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -56,8 +63,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs = {
