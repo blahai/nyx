@@ -14,6 +14,12 @@
   documentation.nixos.enable = false;
 
   boot = {
+    binfmt = {
+      emulatedSystems = ["aarch64-linux"];
+      registrations = {
+        aarch64-linux.interpreter = "${pkgs.qemu}/bin/qemu-aarch64";
+      };
+    };
     tmp.cleanOnBoot = true;
     loader = {
       systemd-boot = {
@@ -30,7 +36,7 @@
       package = pkgs.zfs;
       allowHibernation = true; # might cause corruption?
     };
-    kernelPackages = pkgs.linuxPackages_6_12;
+    kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
     kernel = {sysctl = {"vm.max_map_count" = 2147483642;};};
     kernelParams = [
       "elevator=none" # for zfs
@@ -196,6 +202,21 @@
       enable = true;
       lfs.enable = true;
     };
+
+    ssh = {
+      extraConfig = ''
+        Host selene
+          HostName 135.181.31.235
+          User pingu
+          Port 22
+      '';
+      knownHosts = {
+        selene = {
+          hostNames = ["selene" "135.181.31.235"];
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINYiLDjNpZkBCCP4PGj2xc6hfbWhSqXMoeO2+VP+4vX6";
+        };
+      };
+    };
   };
 
   nixpkgs = {
@@ -204,6 +225,21 @@
 
   nix = {
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+    distributedBuilds = true;
+
+    buildMachines = [
+      {
+        hostName = "selene";
+        system = "aarch64-linux";
+        sshUser = "pingu";
+        sshKey = "/home/pingu/.ssh/id_ed25519";
+        protocol = "ssh-ng";
+        maxJobs = 8;
+        speedFactor = 2;
+        supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
+      }
+    ];
+
     settings = {
       experimental-features = [
         "nix-command"
@@ -224,6 +260,7 @@
       use-xdg-base-directories = true;
       allowed-users = ["@wheel" "pingu" "root"];
       trusted-users = ["@wheel" "pingu" "root"];
+      builders-use-substitutes = true;
       substituters = [
         "https://nix-community.cachix.org"
         "https://nixpkgs-unfree.cachix.org"
@@ -261,7 +298,11 @@
       diff-so-fancy
       eog
       bottles
-      ffmpeg
+      ((ffmpeg-full.override {
+          withUnfree = true;
+          withOpengl = true;
+        })
+        .overrideAttrs (_: {doCheck = false;}))
       gst_all_1.gstreamer
       gst_all_1.gst-libav
       gst_all_1.gst-vaapi
@@ -321,6 +362,22 @@
       speedcrunch
       geogebra
       qbittorrent
+
+      # Quickshell
+      (inputs.quickshell.packages."${pkgs.system}".default.override
+        {
+          withJemalloc = true;
+          withQtSvg = true;
+          withWayland = true;
+          withX11 = false;
+          withPipewire = true;
+          withPam = true;
+          withHyprland = true;
+          withI3 = false;
+        })
+      qt6.qtwayland
+      libsForQt5.qt5.qtgraphicaleffects
+      kdePackages.qt5compat
     ];
   };
   fonts.packages = with pkgs; [

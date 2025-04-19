@@ -30,7 +30,6 @@
 
         "Super+Shift, S, togglespecialworkspace"
 
-        "Super, R, exec, ${pkgs.anyrun}/bin/anyrun"
         "Super, W, exec, ${pkgs.floorp}/bin/floorp"
         "Super, Q, exec, wezterm"
         "Super, C, killactive"

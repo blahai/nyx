@@ -6,7 +6,7 @@
 }: {
   imports = [
     ../../modules/home-manager/default.nix
-    inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.catppuccin.homeModules.catppuccin
   ];
 
   home.username = "pingu";
@@ -41,12 +41,12 @@
   programs.ssh = {
     enable = true;
     extraConfig = ''
-      Host theia
-        HostName 5.231.45.234
-        User pingu
-
       Host artemis
         HostName 100.106.17.39
+        User pingu
+
+      Host selene
+        HostName 135.181.31.235
         User pingu
     '';
   };

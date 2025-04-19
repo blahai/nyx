@@ -10,6 +10,7 @@
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     #nixpkgs.url = "github:nixos/nixpkgs";
     #nixpkgs.url = "path:/home/pingu/Documents/GitHub/NixOS/nixpkgs";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # to keep lix up to date
@@ -77,6 +78,7 @@
 
   outputs = {
     nixpkgs,
+    nixpkgs-unstable,
     lix-module,
     chaotic,
     home-manager,
@@ -87,6 +89,7 @@
       nyx = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
+          upkgs = import nixpkgs-unstable;
         };
         modules = [
           ./hosts/nyx/configuration.nix
