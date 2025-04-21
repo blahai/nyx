@@ -6,11 +6,10 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs";
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    #nixpkgs.url = "github:nixos/nixpkgs";
+    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
     #nixpkgs.url = "path:/home/pingu/Documents/GitHub/NixOS/nixpkgs";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # to keep lix up to date
@@ -28,7 +27,7 @@
     };
 
     haipkgs = {
-      url = "git+https://git.blahai.gay/elissa/haipkgs.git";
+      url = "github:blahai/haipkgs";
       inputs = {
         nixpkgs.follows = "nixpkgs";
       };
@@ -78,7 +77,6 @@
 
   outputs = {
     nixpkgs,
-    nixpkgs-unstable,
     lix-module,
     chaotic,
     home-manager,
@@ -89,7 +87,6 @@
       nyx = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
-          upkgs = import nixpkgs-unstable;
         };
         modules = [
           ./hosts/nyx/configuration.nix
